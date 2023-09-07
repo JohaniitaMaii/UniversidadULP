@@ -1,8 +1,10 @@
 package universidadulp.acceso;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-// IMPORTAR ENTIDAD ALUMNO
+import universidadulp.entidades.Alumno;
+
 
 /**
  *
@@ -16,7 +18,7 @@ public final class AlumnoDAO extends Conexion {
                 throw new Exception("Debe indicar un alumno");
             }
             String sql = "INSERT INTO alumno(dni, nombre, apellido,fecha_nac) VALUES (" + a.getDni() + ", '" +
-                    a.getNombre() + "', '" + a.getApellido() + "','" + a.getFecha_nac() + "');";
+                    a.getNombre() + "', '" + a.getApellido() + "','" + a.getFechaNacimiento() + "');";
             modificarBase(sql);
         } catch (Exception e ) {
             System.out.println("Error al crear el Alumno");
@@ -31,7 +33,7 @@ public final class AlumnoDAO extends Conexion {
         if (a != null) {
             throw new Exception("Debe indicar el alumno");
         }
-        String sql = "UPDATE alumno SET estado= " + a.isEstado() + " WHERE id= " + a.getId();
+        String sql = "UPDATE alumno SET estado= " + a.isEstado() + " WHERE id= " + a.getIdAlumno();
         modificarBase(sql);
         } catch (Exception e) {
             throw e;
@@ -40,18 +42,18 @@ public final class AlumnoDAO extends Conexion {
         }
     }
     
-    public Alumno buscarAlumnoPorId(int dni) throws Exception {
+    public Alumno buscarAlumnoPorDni(int dni) throws Exception {
         try {
             String sql = "SELECT * FROM alumno WHERE dni = " + dni + ";" ;
             consultarBase(sql);
             Alumno alumno = null;
             while (resultado.next()){
                 alumno = new Alumno();
-                alumno.setId(resultado.getInt(1));
-                alumno.setDni(resultado.getLong(2));
+                alumno.setIdAlumno(resultado.getInt(1));
+                alumno.setDni(resultado.getInt(2));
                 alumno.setNombre(resultado.getString(3));
                 alumno.setApellido(resultado.getString(4));
-                alumno.setFecha_nac(resultado.getDate(5));
+                alumno.setFechaNacimiento(resultado.getDate(5));
                 alumno.setEstado(resultado.getBoolean(6));
             }              
             desconectarBase();
@@ -71,11 +73,11 @@ public final class AlumnoDAO extends Conexion {
             Alumno alumno = null;
             while (resultado.next()){
                 alumno = new Alumno();
-                alumno.setId(resultado.getInt(1));
-                alumno.setDni(resultado.getLong(2));
+                alumno.setIdAlumno(resultado.getInt(1));
+                alumno.setDni(resultado.getInt(2));
                 alumno.setNombre(resultado.getString(3));
                 alumno.setApellido(resultado.getString(4));
-                alumno.setFecha_nac(resultado.getDate(5));
+                alumno.setFechaNacimiento(resultado.getDate(5));
                 alumno.setEstado(resultado.getBoolean(6));
             }              
             desconectarBase();
@@ -107,11 +109,11 @@ public final class AlumnoDAO extends Conexion {
             consultarBase(sql);
             while (resultado.next()){
                 alumno = new Alumno();
-                alumno.setId(resultado.getInt(1));
-                alumno.setDni(resultado.getLong(2));
+                alumno.setIdAlumno(resultado.getInt(1));
+                alumno.setDni(resultado.getInt(2));
                 alumno.setNombre(resultado.getString(3));
                 alumno.setApellido(resultado.getString(4));
-                alumno.setFecha_nac(resultado.getDate(5));
+                alumno.setFechaNacimiento(resultado.getDate(5));
                 alumno.setEstado(resultado.getBoolean(6));
                 alumnos.add(alumno);
             }

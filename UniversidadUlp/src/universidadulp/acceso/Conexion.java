@@ -24,7 +24,7 @@ public class Conexion {
     protected void conectarBase() throws Exception {  
         try {
             Class.forName(DRIVER);  
-            String url = "jdbc:mariadb://190-114-70-58.sanluisctv.com.ar/" + DATABASE ;
+            String url = "jdbc:mariadb://localhost:1234/" + DATABASE ;
             conexion = DriverManager.getConnection(url, USER, PASSWORD);
         } catch (ClassNotFoundException e) {
             System.out.println("Error al conectar a la base de datos");

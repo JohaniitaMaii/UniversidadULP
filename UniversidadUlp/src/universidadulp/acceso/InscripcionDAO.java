@@ -2,7 +2,8 @@ package universidadulp.acceso;
 
 import java.util.ArrayList;
 import java.util.List;
-// IMPORTAR INSCRIPCION
+import universidadulp.entidades.Inscripcion;
+
 
 /**
  *
@@ -15,8 +16,8 @@ public class InscripcionDAO extends Conexion {
             if (i == null) {
                 throw new Exception("Debe indicar una Inscripcion");
             }
-            String sql = "INSERT INTO inscripcion VALUES (" + i.getId_incripcion() + ", " +
-                    i.getNota() + ", " + i.getId_alumno() + "," + i.getId_materia() + ");";
+            String sql = "INSERT INTO inscripcion VALUES (" + i.getIdInscripto()+ ", " +
+                    i.getNota() + ", " + i.getAlumno().getIdAlumno()+ "," + i.getMateria().getIdMateria()+ ");";
             modificarBase(sql);
         } catch (Exception e ) {
             System.out.println("Error al crear la Inscripcion");
@@ -31,7 +32,7 @@ public class InscripcionDAO extends Conexion {
         if (i != null) {
             throw new Exception("Debe indicar una Inscrpcion");
         }
-        String sql = "UPDATE inscripcion SET nota = " + i.getNota() + " WHERE id= " + i.getId_incripcion();
+        String sql = "UPDATE inscripcion SET nota = " + i.getNota() + " WHERE id= " + i.getIdInscripto();
         modificarBase(sql);
         } catch (Exception e) {
             throw e;
@@ -47,10 +48,10 @@ public class InscripcionDAO extends Conexion {
             Inscripcion inscripcion = null;
             while (resultado.next()){
                 inscripcion = new Inscripcion();
-                inscripcion.setId_incripcion(resultado.getInt(1));
+                inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-                inscripcion.setId_alumno(resultado.getInt(3));
-                inscripcion.setId_materia(resultado.getInt(4));
+                inscripcion.getAlumno().setIdAlumno(resultado.getInt(3));
+                inscripcion.getMateria().setIdMateria(resultado.getInt(4));
             }              
             desconectarBase();
             return inscripcion;
@@ -70,10 +71,10 @@ public class InscripcionDAO extends Conexion {
             while (resultado.next()){
                 inscripcion = new Inscripcion();
                 inscripcion = new Inscripcion();
-                inscripcion.setId_incripcion(resultado.getInt(1));
+                inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-                inscripcion.setId_alumno(resultado.getInt(3));
-                inscripcion.setId_materia(resultado.getInt(4));
+                inscripcion.getAlumno().setIdAlumno(resultado.getInt(3));
+                inscripcion.getMateria().setIdMateria(resultado.getInt(4));
             }              
             desconectarBase();
             return inscripcion;
@@ -99,15 +100,14 @@ public class InscripcionDAO extends Conexion {
     public List<Inscripcion> listarInscripcion() throws Exception {
         try {
             String sql = "SELECT * FROM inscripcion ";
-            Inscripcion inscripcion = null;
+            Inscripcion inscripcion = new Inscripcion();
             List<Inscripcion> inscripciones = new ArrayList<>();
             consultarBase(sql);
             while (resultado.next()){
-                inscripcion = new Inscripcion();
-                inscripcion.setId_incripcion(resultado.getInt(1));
+                inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-                inscripcion.setId_alumno(resultado.getInt(3));
-                inscripcion.setId_materia(resultado.getInt(4));
+                inscripcion.getAlumno().setIdAlumno(resultado.getInt(3));
+                inscripcion.getMateria().setIdMateria(resultado.getInt(4));
                 inscripciones.add(inscripcion);
             }
             return inscripciones;
