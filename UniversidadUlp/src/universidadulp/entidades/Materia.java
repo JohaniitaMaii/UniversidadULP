@@ -60,6 +60,4 @@ public class Materia {
         return "Id Materia=" + idMateria + ", Nombre=" + nombre + ", Año=" + anioMateria + ", Estado=" + estado;
     }
 
-    
-    
 }
