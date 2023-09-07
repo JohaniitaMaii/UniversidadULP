@@ -1,8 +1,5 @@
 package universidadulp.entidades;
 
-import universidad.Entidades.Materia;
-import universidadulp.entidades.Alumno;
-
 public class Inscripcion {
 
     private int idInscripto;

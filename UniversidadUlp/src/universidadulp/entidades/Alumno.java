@@ -1,19 +1,20 @@
 package universidadulp.entidades;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Alumno {
+
     private int idAlumno;
     private int dni;
     private String apellido;
     private String nombre;
-    private LocalDate fechaNacimiento;
+    private Date fechaNacimiento;
     private boolean estado;
 
     public Alumno() {
     }
 
-    public Alumno(int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
+    public Alumno(int dni, String apellido, String nombre, Date fechaNacimiento, boolean estado) {
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
@@ -21,7 +22,7 @@ public class Alumno {
         this.estado = estado;
     }
 
-    public Alumno(int idAlumno, int dni, String apellido, String nombre, LocalDate fechaNacimiento, boolean estado) {
+    public Alumno(int idAlumno, int dni, String apellido, String nombre, Date fechaNacimiento, boolean estado) {
         this.idAlumno = idAlumno;
         this.dni = dni;
         this.apellido = apellido;
@@ -62,11 +63,11 @@ public class Alumno {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaNacimiento() {
+    public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+    public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
 
@@ -82,9 +83,5 @@ public class Alumno {
     public String toString() {
         return "IdAlumno = " + idAlumno + ", Dni=" + dni + ", Apellido=" + apellido + ", Nombre=" + nombre + ", Fecha de Nacimiento=" + fechaNacimiento + ", Estado=" + estado;
     }
-    
-    
-    
-    
-    
+
 }
