@@ -17,17 +17,18 @@ public class Conexion {
     protected Statement sentencia = null;
     
     private final String USER = "root"; 
-    private final String PASSWORD = "";
-    private final String DATABASE = "universidad"; 
+    private final String PASSWORD = "5872";
+    private final String DATABASE = "universidadulp";
     private final String DRIVER = "org.mariadb.jdbc.Driver";
     
     protected void conectarBase() throws Exception {  
         try {
             Class.forName(DRIVER);  
-            String url = "jdbc:mariadb://localhost:1234/" + DATABASE ;
+            String url = "jdbc:mariadb://localhost/" + DATABASE ;
             conexion = DriverManager.getConnection(url, USER, PASSWORD);
+            System.out.println("Conexion exitosa");//CAmbio
         } catch (ClassNotFoundException e) {
-            System.out.println("Error al conectar a la base de datos");
+            System.out.println("Error al conectar a la base de datos 333333");
         }
     }
 
