@@ -29,7 +29,7 @@ public final class AlumnoDAO extends Conexion {
 
     public Alumno buscarAlumnoPorId(int id) throws Exception {//2
         try {
-            String sql = "SELECT * FROM alumno WHERE id = " + id;
+            String sql = "SELECT * FROM alumno WHERE idAlumno = " + id;
             consultarBase(sql);
             Alumno alumno = null;
             while (resultado.next()) {

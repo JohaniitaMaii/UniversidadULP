@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-09-2023 a las 21:16:17
+-- Tiempo de generación: 11-09-2023 a las 20:56:45
 -- Versión del servidor: 8.0.34
 -- Versión de PHP: 8.2.4
 
@@ -43,9 +43,8 @@ CREATE TABLE `alumno` (
 INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`, `estado`) VALUES
 (1, 52745628, 'Lopez', 'Juan', '2000-08-29', 1),
 (2, 51546398, 'Rodriguez', 'Juana', '2000-06-06', 1),
-(3, 46456123, 'Di Gangi', 'Yamila Belen', '1996-01-05', 1),
-(4, 39786543, 'Castillo', 'Eleonora', '1997-07-13', 1),
-(5, 26785543, 'Becerra', 'HERnan', '1988-09-12', NULL);
+(3, 27989543, 'Martinez', 'Sandra', '1996-01-05', 1),
+(4, 39786543, 'Castillo', 'Eleonora', '1997-07-13', 1);
 
 -- --------------------------------------------------------
 
@@ -55,11 +54,7 @@ INSERT INTO `alumno` (`idAlumno`, `dni`, `apellido`, `nombre`, `fechaNacimiento`
 
 CREATE TABLE `inscripcion` (
   `idInscripto` int NOT NULL,
-<<<<<<< Updated upstream
-  `nota` double NOT NULL,
-=======
   `nota` int NOT NULL,
->>>>>>> Stashed changes
   `idAlumno` int NOT NULL,
   `idMateria` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -131,7 +126,7 @@ ALTER TABLE `materia`
 -- AUTO_INCREMENT de la tabla `alumno`
 --
 ALTER TABLE `alumno`
-  MODIFY `idAlumno` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idAlumno` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `inscripcion`
@@ -143,7 +138,7 @@ ALTER TABLE `inscripcion`
 -- AUTO_INCREMENT de la tabla `materia`
 --
 ALTER TABLE `materia`
-  MODIFY `idMateria` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idMateria` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Restricciones para tablas volcadas

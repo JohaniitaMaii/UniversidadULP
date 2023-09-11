@@ -17,8 +17,8 @@ public class InscripcionDAO extends Conexion {
             if (i == null) {
                 throw new Exception("Debe indicar una Inscripcion");
             }
-            String sql = "INSERT INTO inscripcion VALUES (" + i.getIdInscripto() + ", " +
-                    i.getNota() + ", " + i.getAlumno().getIdAlumno()+ "," + i.getMateria().getIdMateria()+ ");";
+            String sql = "INSERT INTO inscripcion (nota,idAlumno,idMateria) VALUES  (" +
+                    i.getNota() + ", " + i.getAlumno()+ "," + i.getMateria()+ ");";
             modificarBase(sql);
         } catch (Exception e) {
             System.out.println("Error al crear la Inscripcion");
@@ -32,14 +32,13 @@ public class InscripcionDAO extends Conexion {
         try {
             String sql = "SELECT * FROM inscripcion ";
             Inscripcion inscripcion = new Inscripcion();
-            ;
             List<Inscripcion> inscripciones = new ArrayList<>();
             consultarBase(sql);
             while (resultado.next()) {
                 inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-                inscripcion.getAlumno().setIdAlumno(resultado.getInt(3));
-                inscripcion.getMateria().setIdMateria(resultado.getInt(4));
+                inscripcion.setAlumno(resultado.getInt(3));
+                inscripcion.setMateria(resultado.getInt(4));
                 inscripciones.add(inscripcion);
             }
             return inscripciones;
@@ -62,8 +61,8 @@ public class InscripcionDAO extends Conexion {
             while (resultado.next()) {
                 inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-                inscripcion.getAlumno().setIdAlumno(resultado.getInt(3));
-                inscripcion.getMateria().setIdMateria(resultado.getInt(4));
+                inscripcion.setAlumno(resultado.getInt(3));
+                inscripcion.setMateria(resultado.getInt(4));
                 inscripciones.add(inscripcion);
             }
             return inscripciones;
@@ -78,20 +77,21 @@ public class InscripcionDAO extends Conexion {
     public List<Materia> obtenerMateriaCursada(int id) throws Exception {
         List<Materia> materias = new ArrayList<>();
         try {
-            String sql = "SELECT m.nombre, m.anio, m. estado, i.idInscripto FROM materia AS m JOIN inscripcion " +
-                    " AS i ON m.idMateria = i.idMateria WHERE i.id_materia = " + id + " AND m.estado = true ;";
+            String sql = "SELECT m.idMateria, m.nombre, m.año, m. estado FROM materia AS m JOIN inscripcion " +
+                    " AS i ON m.idMateria = i.idMateria WHERE i.idMateria = "+ id + " AND m.estado = true ;";
             consultarBase(sql);
             while (resultado.next()) {
                 Materia m = new Materia();
                 m.setIdMateria(resultado.getInt(1));
                 m.setNombre(resultado.getString(2));
-                m.setAnioMateria(resultado.getInt(2));
+                m.setAnioMateria(resultado.getInt(3));
                 m.setEstado(resultado.getBoolean(4));
                 materias.add(m);
             }
             return materias;
         } catch (Exception e) {
             System.out.println("Error al Obtener las Materias");
+            System.out.println(e.getMessage());
             throw e;
         } finally {
             desconectarBase();
@@ -101,14 +101,14 @@ public class InscripcionDAO extends Conexion {
     public List<Materia> obtenerMateriaNoCursada(int id) throws Exception {
         List<Materia> materias = new ArrayList<>();
         try {
-            String sql = "SELECT m.nombre, m.anio, m. estado, i.idInscripto FROM materia AS m JOIN inscripcion " +
-                    " AS i ON m.idMateria = i.idMateria WHERE i.id_materia = " + id + " AND m.estado = false ;";
+            String sql = "SELECT m.isMateria, m.nombre, m.año, m. estado FROM materia AS m JOIN inscripcion " +
+                    " AS i ON m.idMateria = i.idMateria WHERE i.idMateria = " + id + " AND m.estado = false ;";
             consultarBase(sql);
             while (resultado.next()) {
                 Materia m = new Materia();
                 m.setIdMateria(resultado.getInt(1));
                 m.setNombre(resultado.getString(2));
-                m.setAnioMateria(resultado.getInt(2));
+                m.setAnioMateria(resultado.getInt(3));
                 m.setEstado(resultado.getBoolean(4));
                 materias.add(m);
             }
@@ -151,7 +151,9 @@ public class InscripcionDAO extends Conexion {
         try {
             List<Alumno> alumnos = new ArrayList<>();
             Alumno a = new Alumno();
-            String sql = "SELECT * FROM inscripcion WHERE idMateria = " + idM + ";";
+            String sql = "SELECT a.* FROM inscripcion AS i JOIN alumno AS a ON i.idAlumno = a.idAlumno WHERE idMateria ="
+                    + idM + ";";
+            consultarBase(sql);
             while (resultado.next()) {
                 a.setIdAlumno(resultado.getInt(1));
                 a.setDni(resultado.getInt(2));
@@ -160,8 +162,7 @@ public class InscripcionDAO extends Conexion {
                 a.setFechaNacimiento(resultado.getDate(5));
                 a.setEstado(resultado.getBoolean(6));
                 alumnos.add(a);
-            }
-            consultarBase(sql);
+            } 
             return alumnos;
         } catch (Exception e) {
             System.out.println("Error al obtener los Alumnos");
