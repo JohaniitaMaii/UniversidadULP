@@ -5,6 +5,10 @@
         <group>
             <file>file:/C:/Users/johan/Documents/GitHub/UniversidadULP/UniversidadUlp/src/universidadulp/acceso/Conexion.java</file>
             <file>file:/C:/Users/johan/Documents/GitHub/UniversidadULP/UniversidadUlp/src/universidadulp/acceso/AlumnoDAO.java</file>
+<<<<<<< Updated upstream
+=======
+            <file>file:/C:/Users/johan/Documents/GitHub/UniversidadULP/UniversidadUlp/src/universidadulp/entidades/Alumno.java</file>
+>>>>>>> Stashed changes
             <file>file:/C:/Users/johan/Documents/GitHub/UniversidadULP/UniversidadUlp/src/universidadulp/acceso/InscripcionDAO.java</file>
             <file>file:/C:/Users/johan/Documents/GitHub/UniversidadULP/UniversidadUlp/src/universidadulp/acceso/MateriaDAO.java</file>
             <file>file:/C:/Users/johan/Documents/GitHub/UniversidadULP/UniversidadUlp/src/universidadulp/UniversidadULP.java</file>
