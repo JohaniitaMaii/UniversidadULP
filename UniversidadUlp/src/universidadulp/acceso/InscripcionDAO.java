@@ -38,8 +38,8 @@ public class InscripcionDAO extends Conexion {
             while (resultado.next()) {
                 inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-//                inscripcion.setId_alumno(resultado.getInt(3));
-//                inscripcion.setId_materia(resultado.getInt(4));
+                inscripcion.getAlumno().setIdAlumno(resultado.getInt(3));
+                inscripcion.getMateria().setIdMateria(resultado.getInt(4));
                 inscripciones.add(inscripcion);
             }
             return inscripciones;
@@ -62,8 +62,8 @@ public class InscripcionDAO extends Conexion {
             while (resultado.next()) {
                 inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-//                inscripcion.setAlumno(resultado.getInt(3));
-//                inscripcion.setId_materia(resultado.getInt(4));
+                inscripcion.getAlumno().setIdAlumno(resultado.getInt(3));
+                inscripcion.getMateria().setIdMateria(resultado.getInt(4));
                 inscripciones.add(inscripcion);
             }
             return inscripciones;
