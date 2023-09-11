@@ -17,8 +17,8 @@ public class InscripcionDAO extends Conexion {
             if (i == null) {
                 throw new Exception("Debe indicar una Inscripcion");
             }
-            String sql = "INSERT INTO inscripcion VALUES (" + i.getId_incripcion() + ", " +
-                    i.getNota() + ", " + i.getId_alumno() + "," + i.getId_materia() + ");";
+            String sql = "INSERT INTO inscripcion VALUES (" + i.getIdInscripto() + ", " +
+                    i.getNota() + ", " + i.getAlumno().getIdAlumno()+ "," + i.getMateria().getIdMateria()+ ");";
             modificarBase(sql);
         } catch (Exception e) {
             System.out.println("Error al crear la Inscripcion");
@@ -36,10 +36,10 @@ public class InscripcionDAO extends Conexion {
             List<Inscripcion> inscripciones = new ArrayList<>();
             consultarBase(sql);
             while (resultado.next()) {
-                inscripcion.setId_incripcion(resultado.getInt(1));
+                inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-                inscripcion.setId_alumno(resultado.getInt(3));
-                inscripcion.setId_materia(resultado.getInt(4));
+//                inscripcion.setId_alumno(resultado.getInt(3));
+//                inscripcion.setId_materia(resultado.getInt(4));
                 inscripciones.add(inscripcion);
             }
             return inscripciones;
@@ -60,10 +60,10 @@ public class InscripcionDAO extends Conexion {
             List<Inscripcion> inscripciones = new ArrayList<>();
             consultarBase(sql);
             while (resultado.next()) {
-                inscripcion.setId_incripcion(resultado.getInt(1));
+                inscripcion.setIdInscripto(resultado.getInt(1));
                 inscripcion.setNota(resultado.getInt(2));
-                inscripcion.setId_alumno(resultado.getInt(3));
-                inscripcion.setId_materia(resultado.getInt(4));
+//                inscripcion.setAlumno(resultado.getInt(3));
+//                inscripcion.setId_materia(resultado.getInt(4));
                 inscripciones.add(inscripcion);
             }
             return inscripciones;
@@ -85,7 +85,7 @@ public class InscripcionDAO extends Conexion {
                 Materia m = new Materia();
                 m.setIdMateria(resultado.getInt(1));
                 m.setNombre(resultado.getString(2));
-                m.setAño(resultado.getInt(2));
+                m.setAnioMateria(resultado.getInt(2));
                 m.setEstado(resultado.getBoolean(4));
                 materias.add(m);
             }
