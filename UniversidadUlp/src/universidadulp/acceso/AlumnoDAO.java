@@ -16,8 +16,8 @@ public final class AlumnoDAO extends Conexion {
             if (a == null) {
                 throw new Exception("Debe indicar un alumno");
             }
-            String sql = "INSERT INTO alumno(dni,apellido, nombre,fechaNacimiento) VALUES (" + a.getDni() + ", '"
-                    + a.getApellido() + "', '" + a.getNombre() + "','" + a.getFechaNacimiento() + "');";
+            String sql = "INSERT INTO alumno(dni,apellido, nombre,fechaNacimiento, estado) VALUES (" + a.getDni() + ", '"
+                    + a.getApellido() + "', '" + a.getNombre() + "','" + a.getFechaNacimiento() + "',"+a.isEstado()+")"; 
             modificarBase(sql);
         } catch (Exception e) {
             System.out.println("Error al crear el Alumno");
@@ -29,7 +29,7 @@ public final class AlumnoDAO extends Conexion {
 
     public Alumno buscarAlumnoPorId(int id) throws Exception {//2
         try {
-            String sql = "SELECT * FROM alumno WHERE id = " + id;
+            String sql = "SELECT * FROM alumno WHERE idAlumno = " + id;
             consultarBase(sql);
             Alumno alumno = null;
             while (resultado.next()) {
@@ -102,10 +102,12 @@ public final class AlumnoDAO extends Conexion {
 
     public void modificarAlumno(Alumno a) throws Exception {//5
         try {
-            if (a != null) {
+            if (a == null) {
                 throw new Exception("Debe indicar el alumno");
             }
-            String sql = "UPDATE alumno SET estado= " + a.isEstado() + " WHERE id= " + a.getIdAlumno();
+            String sql = "UPDATE alumno SET dni = "+a.getDni()
+                    +", apellido = '"+a.getApellido()+"', nombre = '"+ a.getNombre()
+                    +"', estado= " + a.isEstado() + " WHERE idAlumno= " + a.getIdAlumno();
             modificarBase(sql);
         } catch (Exception e) {
             throw e;

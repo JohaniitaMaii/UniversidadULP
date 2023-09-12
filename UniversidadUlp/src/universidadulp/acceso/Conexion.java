@@ -3,6 +3,7 @@ package universidadulp.acceso;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -17,20 +18,22 @@ public class Conexion {
     protected Statement sentencia = null;
     
     private final String USER = "root"; 
-    private final String PASSWORD = "5872";
+    private final String PASSWORD = "";
     private final String DATABASE = "universidadulp";
     private final String DRIVER = "org.mariadb.jdbc.Driver";
     
     protected void conectarBase() throws Exception {  
         try {
             Class.forName(DRIVER);  
-            String url = "jdbc:mariadb://localhost/" + DATABASE ;
+            String url = "jdbc:mariadb://localhost:1234/" + DATABASE ;
             conexion = DriverManager.getConnection(url, USER, PASSWORD);
-            System.out.println("Conexion exitosa");//CAmbio
         } catch (ClassNotFoundException e) {
-            System.out.println("Error al conectar a la base de datos 333333");
+            System.out.println("Error al conectar a la base de datos");
+            System.out.println(e.getMessage());
+            throw  e;
         }
     }
+ 
 
     protected ResultSet consultarBase(String sql) throws Exception {
         try {
@@ -68,7 +71,7 @@ public class Conexion {
             if (conexion != null) {
                 conexion.close();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error al desconectar Base");
             throw e;
         }

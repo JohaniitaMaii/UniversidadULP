@@ -4,19 +4,19 @@ public class Inscripcion {
 
     private int idInscripto;
     private int nota;
-    private Alumno alumno;
-    private Materia materia;
+    private int alumno;
+    private int materia;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(int nota, Alumno alumno, Materia materia) {
+    public Inscripcion(int nota, int alumno, int materia) {
         this.nota = nota;
         this.alumno = alumno;
         this.materia = materia;
     }
 
-    public Inscripcion(int idInscripto, int nota, Alumno alumno, Materia materia) {
+    public Inscripcion(int idInscripto, int nota, int alumno, int materia) {
         this.idInscripto = idInscripto;
         this.nota = nota;
         this.alumno = alumno;
@@ -39,25 +39,25 @@ public class Inscripcion {
         this.nota = nota;
     }
 
-    public Alumno getAlumno() {
+    public int getAlumno() {
         return alumno;
     }
 
-    public void setAlumno(Alumno alumno) {
+    public void setAlumno(int alumno) {
         this.alumno = alumno;
     }
 
-    public Materia getMateria() {
+    public int getMateria() {
         return materia;
     }
 
-    public void setMateria(Materia materia) {
+    public void setMateria(int materia) {
         this.materia = materia;
     }
 
     @Override
     public String toString() {
-        return "Id Inscripto=" + idInscripto + ", Nota=" + nota + ", Alumno=" + alumno + ", Materia=" + materia;
+        return "Id Inscripto = " + idInscripto + ", Nota = " + nota + ", Alumno = " + alumno + ", Materia = " + materia;
     }
 
 }
