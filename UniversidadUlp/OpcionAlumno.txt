@@ -1,0 +1,11 @@
+Persona: (dni, nombre, apellido, fecha_naci, acceso (enum)) clase Padre
+Alumno extends Persona (idAlumno, estado)
+Enum (Administrativo, Alumno)
+
+Alumno 	INSCRIPCIONDAO
+	public List<Inscripcion> obtenerInscripcionesPorAlumno(int id))
+	public List<Materia> obtenerMateriaCursada(int id)
+	public List<Materia> obtenerMateriaNoCursada(int id)
+	MATERIADAO
+	public Materia buscarMateria(int idMateria)
+	public List<Materia> listarMaterias()
