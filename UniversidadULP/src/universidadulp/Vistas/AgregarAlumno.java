@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package universidadulp.Vistas;
-import java.sql.Date;
+
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import universidadulp.acceso.AlumnoDAO;
 import universidadulp.entidades.Alumno;
 
@@ -61,6 +63,11 @@ public class AgregarAlumno extends javax.swing.JInternalFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 194, -1, -1));
 
         jRBEstado.setBackground(new java.awt.Color(153, 153, 255));
+        jRBEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBEstadoActionPerformed(evt);
+            }
+        });
         jPanel1.add(jRBEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 233, -1, -1));
 
         jLabel5.setText("Estado:");
@@ -98,11 +105,11 @@ public class AgregarAlumno extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
         );
 
         pack();
@@ -113,17 +120,23 @@ public class AgregarAlumno extends javax.swing.JInternalFrame {
         int dni = Integer.parseInt(jTDocumento.getText());
         String apellido = jTApellido.getText();
         String nombre = jTNombre.getText();
-        Date fechaNac = (Date) jDFechaNacimiento.getDate();
+        Date fechaNac =  jDFechaNacimiento.getDate();
+        long day = fechaNac.getTime();
+        java.sql.Date fecha = new java.sql.Date(day);
         Boolean estado = jRBEstado.isSelected();
-        Alumno Al = new Alumno(dni,apellido,nombre,fechaNac,estado);
+        Alumno Al = new Alumno(dni,apellido,nombre,fecha,estado);
         AlumnoDAO AlDAO = new AlumnoDAO();
         try {
             AlDAO.guardarAlumno(Al);
+            JOptionPane.showMessageDialog(this, "Se ha cargado el alumno a la base de datos");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        // private com.toedter.calendar.JDateChooser jDateChooser1;
     }//GEN-LAST:event_jBAgregarAlumnoActionPerformed
+
+    private void jRBEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

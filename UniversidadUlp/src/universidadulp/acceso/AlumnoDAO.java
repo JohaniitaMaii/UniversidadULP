@@ -11,7 +11,7 @@ import universidadulp.entidades.Alumno;
  */
 public final class AlumnoDAO extends Conexion {
 
-    public void guardarAlumno(Alumno a) throws Exception {//1
+    public void guardarAlumno(Alumno a) throws Exception {//1 OCUPADO
         try {
             if (a == null) {
                 throw new Exception("Debe indicar un alumno");
