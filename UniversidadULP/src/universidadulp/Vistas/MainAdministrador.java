@@ -16,6 +16,7 @@ public class MainAdministrador extends javax.swing.JFrame {
    
     public MainAdministrador() {
         initComponents();
+        setLocationRelativeTo(null);
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -40,6 +41,7 @@ public class MainAdministrador extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        listasAlumno = new javax.swing.JMenuItem();
         jMAlumnopMateria = new javax.swing.JMenuItem();
         jMMateriapAlumno = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
@@ -127,6 +129,14 @@ public class MainAdministrador extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Consultas");
+
+        listasAlumno.setText("Listas");
+        listasAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listasAlumnoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(listasAlumno);
 
         jMAlumnopMateria.setText("Listar Alumnos por Materias");
         jMAlumnopMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +248,16 @@ public class MainAdministrador extends javax.swing.JFrame {
        jdpEscritorio.moveToFront(vista);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void listasAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listasAlumnoActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        Listas listas = new Listas();
+        listas.setVisible(true);
+        jdpEscritorio.add(listas);
+       jdpEscritorio.moveToFront(listas);
+        
+    }//GEN-LAST:event_listasAlumnoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -292,6 +312,7 @@ public class MainAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JDesktopPane jdpEscritorio;
+    private javax.swing.JMenuItem listasAlumno;
     // End of variables declaration//GEN-END:variables
 
 }

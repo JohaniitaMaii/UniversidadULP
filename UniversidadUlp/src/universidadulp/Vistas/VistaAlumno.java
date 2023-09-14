@@ -12,10 +12,10 @@ import universidadulp.entidades.Alumno;
  * @author johan
  */
 public class VistaAlumno extends javax.swing.JInternalFrame {
-    
-    
+
     AlumnoDAO alumnoDao = new AlumnoDAO();
     Alumno alumno = new Alumno();
+
     /**
      * Creates new form Alumno
      */
@@ -36,7 +36,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         txtIntegerBuscar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        JBBurcar = new javax.swing.JButton();
         panelDatos = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,12 +55,13 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Buscar Alumno");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "Id Alumno", "Dni Alumno", "" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id Alumno", "Dni Alumno" }));
+        jComboBox1.setSelectedIndex(-1);
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        JBBurcar.setText("Buscar");
+        JBBurcar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                JBBurcarActionPerformed(evt);
             }
         });
 
@@ -76,7 +77,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 .addGap(38, 38, 38)
                 .addComponent(txtIntegerBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addComponent(jButton1)
+                .addComponent(JBBurcar)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         panelBuscarLayout.setVerticalGroup(
@@ -87,7 +88,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtIntegerBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(JBBurcar))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -215,29 +216,30 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       borrarDatos();
-        if (jComboBox1.getSelectedItem().equals("")){
-            JOptionPane.showMessageDialog(this,"Debe indicar una opción");
-        } else if (jComboBox1.getSelectedItem().equals("Id Alumno")) {         
+    private void JBBurcarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBBurcarActionPerformed
+
+        if (jComboBox1.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe indicar una opción");
+        } else if (jComboBox1.getSelectedItem().equals("Id Alumno")) {
             try {
                 alumno = alumnoDao.buscarAlumnoPorId(Integer.parseInt(txtIntegerBuscar.getText()));
             } catch (Exception ex) {
                 Logger.getLogger(VistaAlumno.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-             try {
+            try {
                 alumno = alumnoDao.buscarAlumnoPorDni(Integer.parseInt(txtIntegerBuscar.getText()));
             } catch (Exception ex) {
                 Logger.getLogger(VistaAlumno.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } 
+        }
         if (alumno == null) {
             JOptionPane.showMessageDialog(this, "El alumno no se encuentra en la base de datos");
         } else {
             cargarDatos(alumno);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+//        borrarDatos();
+    }//GEN-LAST:event_JBBurcarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // BOTON NUEVO ALUMNO
@@ -251,7 +253,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -260,21 +262,25 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             try {
                 guardarDatos();
                 alumnoDao.modificarAlumno(alumno);
-                JOptionPane.showMessageDialog(this,"Se ha modificado el Alumno" );
+                JOptionPane.showMessageDialog(this, "Se ha modificado el Alumno");
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-            
+
         }
+        borrarDatos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // ELIMINAR ALUMNO
 
         try {
-            alumnoDao.eliminarAlumno(alumno.getIdAlumno());
+            if (alumnoDao.eliminarAlumno(alumno.getIdAlumno())) {
+                JOptionPane.showMessageDialog(this, "Se ha eliminado el Alumno");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se puede eliminar el alumno porque tiene inscripciones");
+            }
             borrarDatos();
-            JOptionPane.showMessageDialog(this, "Se ha eliminado el Alumno");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -282,7 +288,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    public boolean validar(){   
+    public boolean validar() {
         boolean vali = false;
         if (txtNombre.getText().equals("") || txtNombre.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe indicar el Nombre");
@@ -293,29 +299,31 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         } else if (dateFecha.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Debe indicar Fecha de Nacimiento");
         } else if (!jRadioButton1.isSelected()) {
-             JOptionPane.showMessageDialog(this, "Debe seleccionar estado");
+            JOptionPane.showMessageDialog(this, "Debe seleccionar estado");
         } else {
             vali = true;
         }
         return vali;
     }
-    
-    public void cargarDatos(Alumno a){
+
+    public void cargarDatos(Alumno a) {
         txtNombre.setText(a.getNombre());
         txtApellido.setText(a.getApellido());
         txtDni.setText(a.getDni() + "");
         dateFecha.setDate(a.getFechaNacimiento());
         if (a.isEstado()) {
             jRadioButton1.setSelected(true);
-        }  
+        }
     }
-    
-    public void borrarDatos () {
+
+    public void borrarDatos() {
         txtNombre.setText("");
         txtApellido.setText("");
-        txtDni.setText( "");
-        dateFecha.setToolTipText("");
+        txtDni.setText("");
+        dateFecha.setDate(null);
         jRadioButton1.setSelected(false);
+        txtIntegerBuscar.setText("");
+        jComboBox1.setSelectedIndex(-1);
     }
 
     public Alumno guardarDatos() throws Exception {
@@ -324,8 +332,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         }
         alumno.setNombre(txtNombre.getText());
         alumno.setApellido(txtApellido.getText());
-        alumno.setDni(Integer.parseInt(txtDni.getText()));       
-        Date fechaNac =  dateFecha.getDate();
+        alumno.setDni(Integer.parseInt(txtDni.getText()));
+        Date fechaNac = dateFecha.getDate();
         long day = fechaNac.getTime();
         java.sql.Date fecha = new java.sql.Date(day);
         alumno.setFechaNacimiento(fecha);
@@ -333,10 +341,10 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         alumno.setEstado(estado);
         return alumno;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBBurcar;
     private com.toedter.calendar.JDateChooser dateFecha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

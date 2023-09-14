@@ -16,6 +16,7 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -168,10 +169,12 @@ public class Main extends javax.swing.JFrame {
         if (jTUsuario.getText().equals("Fernando655")&& jTContraseña.getText().equals("1234567")){
         MainAdministrador MAd = new MainAdministrador();
         MAd.setVisible(true);
+        this.dispose();
         }else{
         //MAlumno
         MainAlumno MAl = new MainAlumno();
         MAl.setVisible(true);
+        this.dispose();
         }
         
     }//GEN-LAST:event_jBIngresarActionPerformed
