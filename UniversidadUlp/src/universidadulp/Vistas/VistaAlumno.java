@@ -232,7 +232,11 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 Logger.getLogger(VistaAlumno.class.getName()).log(Level.SEVERE, null, ex);
             }
         } 
-        cargarDatos(alumno);
+        if (alumno == null) {
+            JOptionPane.showMessageDialog(this, "El alumno no se encuentra en la base de datos");
+        } else {
+            cargarDatos(alumno);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -268,8 +272,8 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         // ELIMINAR ALUMNO
 
         try {
-
             alumnoDao.eliminarAlumno(alumno.getIdAlumno());
+            borrarDatos();
             JOptionPane.showMessageDialog(this, "Se ha eliminado el Alumno");
         } catch (Exception e) {
             System.out.println(e.getMessage());
