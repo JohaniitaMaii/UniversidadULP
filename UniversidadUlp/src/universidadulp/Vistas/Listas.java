@@ -5,13 +5,26 @@
  */
 package universidadulp.Vistas;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import universidadulp.acceso.AlumnoDAO;
+import universidadulp.acceso.InscripcionDAO;
+import universidadulp.acceso.MateriaDAO;
+import universidadulp.entidades.Alumno;
+import universidadulp.entidades.Inscripcion;
+import universidadulp.entidades.Materia;
 
 /**
  *
  * @author Johnny
  */
 public class Listas extends javax.swing.JInternalFrame {
+    AlumnoDAO adao = new AlumnoDAO();
+    MateriaDAO mdao = new MateriaDAO();
+    InscripcionDAO idao = new InscripcionDAO();
     
     private DefaultTableModel modelo = new DefaultTableModel();
 //    public Materia materia = new Materia();
@@ -128,45 +141,68 @@ public class Listas extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Boton mostrar
-        if(jComboBox1.getSelectedItem().toString().equals("Materia")){
-            modelo.addColumn("ID Materia");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Año");
-            modelo.addColumn("Estado");
-            jtabla.setModel(modelo);//NOs quedamos acá
-            modelo.addRow(new Object[]{});
+        try {
+            if (jComboBox1.getSelectedItem().toString().equals("Alumno")) {
+                List<Alumno> alumnos = adao.listarAlumno();               
+                cargarListaAlumno(alumnos);
+            } else if (jComboBox1.getSelectedItem().toString().equals("Materia")) {
+                List<Materia> materias = mdao.listarMaterias();
+                cargarListaMateria(materias);
+            } else if (jComboBox1.getSelectedItem().toString().equals("Inscripción")) {
+                List<Inscripcion> inscripciones = idao.listarInscripcion();
+                cargarListaInscripcion(inscripciones);
+            } else {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar una opción");
+            }
+        } catch (Exception e ) {
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     
+    public void cargarListaAlumno(List<Alumno> alumnos) throws Exception {
+        modelo = new DefaultTableModel();
+        modelo.addColumn("ID Alumno");
+        modelo.addColumn("DNI Alumno");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Fecha de nacimiento");
+        modelo.addColumn("Estado");
+        jtabla.setModel(modelo);
+        for (Alumno a : alumnos) {
+            modelo.addRow(new Object[]{a.getIdAlumno(),a.getDni(),a.getApellido(),a.getNombre(),a.getFechaNacimiento(),a.isEstado()});
+        }
+    }
+    
+    public void cargarListaMateria(List<Materia> materias){
+        modelo = new DefaultTableModel();
+        modelo.addColumn("ID Materia");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
+        modelo.addColumn("Estado");
+        jtabla.setModel(modelo);
+        for (Materia m : materias) {
+            modelo.addRow(new Object[]{m.getIdMateria(),m.getNombre(),m.getAnioMateria(),m.isEstado()});
+        }
+    }
+    
+    public void cargarListaInscripcion(List<Inscripcion> inscripciones){
+         modelo = new DefaultTableModel();
+        modelo.addColumn("ID Inscrpcion");
+        modelo.addColumn("Nota");
+        modelo.addColumn("Id Alumno");
+        modelo.addColumn("Id Materia");
+        jtabla.setModel(modelo);
+        for (Inscripcion i : inscripciones) {
+            modelo.addRow(new Object[]{i.getIdInscripto(), i.getNota(),i.getAlumno().getIdAlumno(), i.getMateria().getIdMateria()});
+        }
+        
+    }
+    
     public void cargarTabla(){
-        if(jComboBox1.getSelectedIndex()==-1){
             modelo.addColumn("ID");
             modelo.addColumn("Nombre");
             modelo.addColumn("Estado");
-//            jtabla.setModel(modelo);
-        }else if(jComboBox1.getSelectedItem().toString().equals("Materia")){
-            modelo.addColumn("ID Materia");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Año");
-            modelo.addColumn("Estado");
-//            jtabla.setModel(modelo);
-        }else if(jComboBox1.getSelectedItem().toString().equals("Inscripción")){
-            modelo.addColumn("Id Inscripción");
-            modelo.addColumn("Nota");
-            modelo.addColumn("Id Alumno");
-            modelo.addColumn("Id Materia");
-//            jtabla.setModel(modelo);
-        }else{
-            modelo.addColumn("Id Alumno");
-            modelo.addColumn("DNI");
-            modelo.addColumn("Apellido");
-            modelo.addColumn("Nombre");
-            modelo.addColumn("Fecha de Nacimiento");
-            modelo.addColumn("Estado");
-            
-//            jtabla.setModel(modelo);
-        }
-        jtabla.setModel(modelo);
+            jtabla.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -76,7 +76,7 @@ public final class AlumnoDAO extends Conexion {
         }
     }
 
-    public List<Alumno> listarAlumno() throws Exception {//4
+    public List<Alumno> listarAlumno() throws Exception {//4 OCUPADO
         try {
             String sql = "SELECT * FROM alumno;";
             Alumno alumno = null;
@@ -86,8 +86,8 @@ public final class AlumnoDAO extends Conexion {
                 alumno = new Alumno();
                 alumno.setIdAlumno(resultado.getInt(1));
                 alumno.setDni(resultado.getInt(2));
-                alumno.setNombre(resultado.getString(3));
-                alumno.setApellido(resultado.getString(4));
+                alumno.setApellido(resultado.getString(3));
+                alumno.setNombre(resultado.getString(4));
                 alumno.setFechaNacimiento(resultado.getDate(5));
                 alumno.setEstado(resultado.getBoolean(6));
                 alumnos.add(alumno);

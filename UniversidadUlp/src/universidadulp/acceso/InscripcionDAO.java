@@ -12,7 +12,7 @@ import universidadulp.entidades.Materia;
  */
 public class InscripcionDAO extends Conexion {
 
-     public void guardarInscripcion(Inscripcion ins) throws Exception {
+     public void guardarInscripcion(Inscripcion ins) throws Exception { // OCUPADO
 
         try {
             if (ins == null) {
@@ -30,7 +30,7 @@ public class InscripcionDAO extends Conexion {
         }
     }
 
-    public List<Inscripcion> listarInscripcion() throws Exception {
+    public List<Inscripcion> listarInscripcion() throws Exception { // OCUPADO EN LISTAS
         Alumno alumno = null;
         Materia materia = null;
         Inscripcion ins = null;
@@ -153,7 +153,7 @@ public class InscripcionDAO extends Conexion {
         }
     }
 
-    public void modificarInscripcion(int idAlumno, int idMateria, double nota) throws Exception {
+    public void modificarInscripcion(int idAlumno, int idMateria, double nota) throws Exception { // OCUPADO
         try {
             String sql = "UPDATE inscripcion SET nota = " + nota + " WHERE idAlumno = " + idAlumno
                     + " AND idMateria = " + idMateria;

@@ -9,7 +9,7 @@ import universidadulp.entidades.Materia;
  */
 public final class MateriaDAO extends Conexion {
 
-    public void guardarMateria(Materia materia) throws Exception {
+    public void guardarMateria(Materia materia) throws Exception { // OCUPADO
 
         try {
             String query = "INSERT INTO materia(nombre, año, estado) VALUES ('" + materia.getNombre() + "', "
@@ -23,7 +23,7 @@ public final class MateriaDAO extends Conexion {
     }
 
     // Materia BuscarMateria(int idMateria)
-    public Materia buscarMateria(int idMateria) throws Exception {
+    public Materia buscarMateria(int idMateria) throws Exception { // OCUPADO
         Materia materia = null;
         try {
             String sql = "SELECT * FROM materia WHERE idMateria = " + idMateria;
@@ -47,11 +47,11 @@ public final class MateriaDAO extends Conexion {
     }
 
     // ModificarMateria(Materia materia)
-    public void modificarMateria(Materia materia) throws Exception {
+    public void modificarMateria(Materia materia) throws Exception { // OCUPADO
         try {
             String sql = "UPDATE materia SET nombre = '" + materia.getNombre()
-                    + "', año = " + materia.getAnioMateria() + ", estado= "
-                    + materia.isEstado() + " WHERE idMateria= " + materia.getIdMateria();
+                    + "' , año = " + materia.getAnioMateria() + " , estado =  "
+                    + materia.isEstado() + " WHERE idMateria = " + materia.getIdMateria();
             modificarBase(sql);
             System.out.println("Modificación exitosa");
         } catch (Exception e) {
@@ -62,21 +62,34 @@ public final class MateriaDAO extends Conexion {
     }
 
     // EliminarMateria(int idMateria)
-    public void eliminarMateria(int idMateria) throws Exception {
+    public boolean eliminarMateria(int idMateria) throws Exception { // OCUPADO
+         boolean valido = false;
         try {
-            String sql = " DELETE FROM materia WHERE idMateria = " + idMateria;
-            modificarBase(sql);
-            System.out.println("Materia eliminada");
+            String sql0 = "SELECT COUNT(*) FROM inscripcion WHERE idMateria = " + idMateria;
+            consultarBase(sql0);
+            if (resultado.next()) {
+                int mate = resultado.getInt(1);
+                if (mate == 0) {
+                    String sql = "DELETE FROM materia WHERE idMateria = "
+                            + idMateria;
+                    modificarBase(sql);
+                    System.out.println("Se eliminó la Materia");
+                    valido = true;
+                } else {
+                    System.out.println("La Materia tiene inscripciones con alumnos.");
+                }
+            }
         } catch (Exception e) {
             System.out.println("Error al eliminar la materia");
             throw e;
         } finally {
             desconectarBase();
         }
+        return valido;
     }
 
     // List<Materia> listarMaterias()
-    public List<Materia> listarMaterias() throws Exception {
+    public List<Materia> listarMaterias() throws Exception { // OCUPADO EN VISTA DE LISTAS
         Materia materia = null;
         List<Materia> materias = new ArrayList();
 
