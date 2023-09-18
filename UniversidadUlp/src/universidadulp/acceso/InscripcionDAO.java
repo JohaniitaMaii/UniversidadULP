@@ -64,7 +64,7 @@ public class InscripcionDAO extends Conexion {
         Inscripcion ins = null;
         List<Inscripcion> inscripciones = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM inscripcion AS i JOIN alumno AS a ON i.idAlumno = a.idAlumno "
+            String sql = "SELECT * FROM inscripcion i JOIN alumno a ON i.idAlumno = a.idAlumno "
                     + "WHERE i.idAlumno = " + id + " ;";
 
             consultarBase(sql);
@@ -139,7 +139,7 @@ public class InscripcionDAO extends Conexion {
         }
     }
 
-    public void borrarInscrpcionMateriaAlumno(int idAlumno, int idMateria) throws Exception {
+    public void borrarInscrpcionMateriaAlumno(int idAlumno, int idMateria) throws Exception {//Ocupado vistains
         try {
             String sql = " DELETE FROM inscripcion WHERE idMateria = " + idMateria
                     + " AND idAlumno = " + idAlumno + " ;";

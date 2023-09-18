@@ -207,10 +207,19 @@ MateriaDAO mdao = new MateriaDAO();
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
         // NUEVA MATERIA
+        Materia mate = new Materia();
+        mate.setNombre(txtNombre.getText());
+       mate.setAnioMateria(Integer.parseInt(txtAño.getText()));
+        if (radioButton.isSelected()) {
+            mate.setEstado(true);
+        } else {
+            mate.setEstado(false);
+        }
         if (validar()) {
             try {
-                mdao.guardarMateria(guardarDatos());
+                mdao.guardarMateria(mate);
                 JOptionPane.showMessageDialog(this," Materia cargada a la Base de datos");
+                borrarDatos();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this," No se pudo cargar la nueva Materia");
                 Logger.getLogger(VistaMateria.class.getName()).log(Level.SEVERE, null, ex);
@@ -224,9 +233,9 @@ MateriaDAO mdao = new MateriaDAO();
         // MODIFICAR MATERIA
         if (validar()) {
             try {
-                guardarDatos();
-                mdao.modificarMateria(materia);
+                mdao.modificarMateria(guardarDatos());
                 JOptionPane.showMessageDialog(this," Materia modificada ");
+                borrarDatos();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this," No se pudo modificar la Materia");
                 System.out.println(ex.getMessage());
@@ -241,6 +250,7 @@ MateriaDAO mdao = new MateriaDAO();
             try {
                 if (mdao.eliminarMateria(Integer.parseInt(txtMateriaId.getText()))) {
                     JOptionPane.showMessageDialog(this," Materia eliminada");
+                    borrarDatos();
                 } else {
                     JOptionPane.showMessageDialog(this," La Materia tiene Inscripciones activas. No se puede eliminar");
                 }   

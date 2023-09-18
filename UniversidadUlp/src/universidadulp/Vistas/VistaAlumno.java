@@ -243,10 +243,20 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // BOTON NUEVO ALUMNO
+        Alumno alu = new Alumno();
+        alu.setNombre(txtNombre.getText());
+        alu.setApellido(txtApellido.getText());
+        alu.setDni(Integer.parseInt(txtDni.getText()));
+        Date fechaNac = dateFecha.getDate();
+        long day = fechaNac.getTime();
+        java.sql.Date fecha = new java.sql.Date(day);
+        alu.setFechaNacimiento(fecha);
+        boolean estado = jRadioButton1.isSelected();
+        alu.setEstado(estado);
         try {
             if (validar()) {
-                guardarDatos();
-                alumnoDao.guardarAlumno(alumno);
+//                alumno = guardarDatos();
+                alumnoDao.guardarAlumno(alu);
                 JOptionPane.showMessageDialog(this, "Se ha cargado el alumno");
                 borrarDatos();
             }
@@ -327,7 +337,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
     }
 
     public Alumno guardarDatos() throws Exception {
-        if (txtIntegerBuscar.getText().equals("Id Alumno")) {
+        if (jComboBox1.getSelectedItem().equals("Id Alumno")) {
             alumno.setIdAlumno(Integer.parseInt(txtIntegerBuscar.getText()));
         }
         alumno.setNombre(txtNombre.getText());
@@ -339,6 +349,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         alumno.setFechaNacimiento(fecha);
         boolean estado = jRadioButton1.isSelected();
         alumno.setEstado(estado);
+//        System.out.println(alumno.toString());
         return alumno;
     }
 
