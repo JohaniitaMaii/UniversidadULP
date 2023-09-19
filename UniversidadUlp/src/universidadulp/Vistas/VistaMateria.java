@@ -11,13 +11,17 @@ import universidadulp.entidades.Materia;
  * @author johan
  */
 public class VistaMateria extends javax.swing.JInternalFrame {
-Materia materia = new Materia();
-MateriaDAO mdao = new MateriaDAO();
+
+    Materia materia = new Materia();
+    MateriaDAO mdao = new MateriaDAO();
+    MainAdministrador main = new MainAdministrador();
+
     /**
      * Creates new form VistaMateria
      */
     public VistaMateria() {
         initComponents();
+        
     }
 
     /**
@@ -189,27 +193,33 @@ MateriaDAO mdao = new MateriaDAO();
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         // BOTON BUSCAR MATERIA
-         if (txtMateriaId.getText().equals("") ) {
+        if (txtMateriaId.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe indicar el ID de Materia");
         } else {
-             try {
-                 materia = mdao.buscarMateria(Integer.parseInt(txtMateriaId.getText()));
-                 if (materia != null) {
-                     cargarDatos(materia);
-                 } else {
-                     JOptionPane.showMessageDialog(this, "El Id no existe en la Base de Datos");
-                 }               
-             } catch (Exception ex) {
-                 System.out.println(ex.getMessage());
-             }
-         }
+            if(main.esNumerico(txtMateriaId.getText())){
+            try {
+                materia = mdao.buscarMateria(Integer.parseInt(txtMateriaId.getText()));
+                if (materia != null) {
+                    cargarDatos(materia);
+                } else {
+                    JOptionPane.showMessageDialog(this, "El Id no existe en la Base de Datos");
+                    borrarDatos();
+                }
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            }else{
+                JOptionPane.showMessageDialog(null, "Ingresa un ID correcto.");
+                borrarDatos();
+            }
+        }
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNuevoActionPerformed
         // NUEVA MATERIA
         Materia mate = new Materia();
         mate.setNombre(txtNombre.getText());
-       mate.setAnioMateria(Integer.parseInt(txtAño.getText()));
+        mate.setAnioMateria(Integer.parseInt(txtAño.getText()));
         if (radioButton.isSelected()) {
             mate.setEstado(true);
         } else {
@@ -218,14 +228,14 @@ MateriaDAO mdao = new MateriaDAO();
         if (validar()) {
             try {
                 mdao.guardarMateria(mate);
-                JOptionPane.showMessageDialog(this," Materia cargada a la Base de datos");
+                JOptionPane.showMessageDialog(this, " Materia cargada a la Base de datos");
                 borrarDatos();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this," No se pudo cargar la nueva Materia");
+                JOptionPane.showMessageDialog(this, " No se pudo cargar la nueva Materia");
                 Logger.getLogger(VistaMateria.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            
+
         }
     }//GEN-LAST:event_buttonNuevoActionPerformed
 
@@ -234,10 +244,10 @@ MateriaDAO mdao = new MateriaDAO();
         if (validar()) {
             try {
                 mdao.modificarMateria(guardarDatos());
-                JOptionPane.showMessageDialog(this," Materia modificada ");
+                JOptionPane.showMessageDialog(this, " Materia modificada ");
                 borrarDatos();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this," No se pudo modificar la Materia");
+                JOptionPane.showMessageDialog(this, " No se pudo modificar la Materia");
                 System.out.println(ex.getMessage());
             }
         }
@@ -249,11 +259,11 @@ MateriaDAO mdao = new MateriaDAO();
         if (validar()) {
             try {
                 if (mdao.eliminarMateria(Integer.parseInt(txtMateriaId.getText()))) {
-                    JOptionPane.showMessageDialog(this," Materia eliminada");
+                    JOptionPane.showMessageDialog(this, " Materia eliminada");
                     borrarDatos();
                 } else {
-                    JOptionPane.showMessageDialog(this," La Materia tiene Inscripciones activas. No se puede eliminar");
-                }   
+                    JOptionPane.showMessageDialog(this, " La Materia tiene Inscripciones activas. No se puede eliminar");
+                }
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
@@ -261,28 +271,28 @@ MateriaDAO mdao = new MateriaDAO();
     }//GEN-LAST:event_buttonEliminarActionPerformed
 
     public boolean validar() { // VALIDAR QUE EL ID SEA ENTERO
-       boolean valido = false;
+        boolean valido = false;
         if (txtNombre.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this," Debe indicar el Nombre de la Materia");
+            JOptionPane.showMessageDialog(this, " Debe indicar el Nombre de la Materia");
         } else if (txtAño.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this," Debe indicar el Año de la Materia");
+            JOptionPane.showMessageDialog(this, " Debe indicar el Año de la Materia");
         } else if (!radioButton.isSelected()) {
-            JOptionPane.showMessageDialog(this," Debe indicar el Estado de la Materia");
+            JOptionPane.showMessageDialog(this, " Debe indicar el Estado de la Materia");
         } else {
             valido = true;
         }
         return valido;
     }
-    
-    public void cargarDatos (Materia m) {
+
+    public void cargarDatos(Materia m) {
         txtMateriaId.setText(String.valueOf(m.getIdMateria()));
         txtNombre.setText(m.getNombre());
-        txtAño.setText( String.valueOf(m.getAnioMateria()));
+        txtAño.setText(String.valueOf(m.getAnioMateria()));
         if (m.isEstado()) {
             radioButton.setSelected(true);
         }
     }
-    
+
     public void borrarDatos() {
         txtMateriaId.setText("");
         txtNombre.setText("");
@@ -290,19 +300,20 @@ MateriaDAO mdao = new MateriaDAO();
     }
 
     public Materia guardarDatos() {
-       materia.setNombre(txtNombre.getText());
-       materia.setAnioMateria(Integer.parseInt(txtAño.getText()));
+        materia.setNombre(txtNombre.getText());
+        materia.setAnioMateria(Integer.parseInt(txtAño.getText()));
         if (radioButton.isSelected()) {
             materia.setEstado(true);
         } else {
             materia.setEstado(false);
         }
         System.out.println(materia.toString());
-       return materia;
+        return materia;
     }
+
     
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonBuscar;
     private javax.swing.JButton buttonEliminar;

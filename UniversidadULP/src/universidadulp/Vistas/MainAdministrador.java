@@ -282,6 +282,17 @@ public class MainAdministrador extends javax.swing.JFrame {
        jdpEscritorio.moveToFront(vm);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
+    public boolean esNumerico(String cadena) {//verificar si es un entero
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException ex) {
+            resultado = false;
+        }
+        return resultado;
+    }
+    
     /**
      * @param args the command line arguments
      */

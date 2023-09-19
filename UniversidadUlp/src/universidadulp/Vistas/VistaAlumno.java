@@ -15,6 +15,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
     AlumnoDAO alumnoDao = new AlumnoDAO();
     Alumno alumno = new Alumno();
+    MainAdministrador main = new MainAdministrador();
 
     /**
      * Creates new form Alumno
@@ -220,23 +221,63 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
 
         if (jComboBox1.getSelectedItem().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe indicar una opción");
-        } else if (jComboBox1.getSelectedItem().equals("Id Alumno")) {
-            try {
-                alumno = alumnoDao.buscarAlumnoPorId(Integer.parseInt(txtIntegerBuscar.getText()));
-            } catch (Exception ex) {
-                Logger.getLogger(VistaAlumno.class.getName()).log(Level.SEVERE, null, ex);
-            }
         } else {
-            try {
-                alumno = alumnoDao.buscarAlumnoPorDni(Integer.parseInt(txtIntegerBuscar.getText()));
-            } catch (Exception ex) {
-                Logger.getLogger(VistaAlumno.class.getName()).log(Level.SEVERE, null, ex);
+            if (main.esNumerico(txtIntegerBuscar.getText())) {
+                try {
+                    switch (jComboBox1.getSelectedItem().toString()) {
+                        case "Id Alumno":
+                            alumno = alumnoDao.buscarAlumnoPorId(Integer.parseInt(txtIntegerBuscar.getText()));
+                            break;
+                        case "Dni Alumno":
+                            alumno = alumnoDao.buscarAlumnoPorDni(Integer.parseInt(txtIntegerBuscar.getText()));
+                            break;
+                    }
+                    if (alumno == null) {
+                        JOptionPane.showMessageDialog(this, "El alumno no se encuentra en la base de datos");
+                        borrarDatos();
+                    } else {
+                        cargarDatos(alumno);
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(VistaAlumno.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                borrarDatos();
+               JOptionPane.showMessageDialog(this, "Número Incorrecto");
             }
-        }
-        if (alumno == null) {
-            JOptionPane.showMessageDialog(this, "El alumno no se encuentra en la base de datos");
-        } else {
-            cargarDatos(alumno);
+
+//        if (jComboBox1.getSelectedItem().equals("")) {
+//            JOptionPane.showMessageDialog(this, "Debe indicar una opción");
+//        } else {
+//            if (main.esNumerico(txtIntegerBuscar.getText())) {
+//                if (jComboBox1.getSelectedItem().equals("Id Alumno")) {
+//                    try {
+//
+//                        alumno = alumnoDao.buscarAlumnoPorId(Integer.parseInt(txtIntegerBuscar.getText()));
+//
+//                    } catch (Exception ex) {
+//                        Logger.getLogger(VistaAlumno.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                } else if (jComboBox1.getSelectedItem().equals("Dni Alumno")) {
+//                    try {
+//
+//                        alumno = alumnoDao.buscarAlumnoPorDni(Integer.parseInt(txtIntegerBuscar.getText()));
+//
+//                    } catch (Exception ex) {
+//                        Logger.getLogger(VistaAlumno.class.getName()).log(Level.SEVERE, null, ex);
+//                    }
+//                }
+//                if (alumno == null) {
+//                    JOptionPane.showMessageDialog(this, "El alumno no se encuentra en la base de datos");
+//
+//                } else {
+//                    cargarDatos(alumno);
+//                }
+//            } else {
+//                borrarDatos();
+//                JOptionPane.showMessageDialog(null, "Ingresa un dato correcto");
+//
+//            }
         }
 //        borrarDatos();
     }//GEN-LAST:event_JBBurcarActionPerformed
