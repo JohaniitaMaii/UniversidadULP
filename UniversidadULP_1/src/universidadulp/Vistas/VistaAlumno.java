@@ -157,7 +157,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setText("Limpiar Alumno");
+        jButton3.setText("Cargar Alumno");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -178,11 +178,11 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             .addGroup(panelAccionesLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(88, 88, 88)
+                .addGap(68, 68, 68)
                 .addComponent(jButton4)
-                .addGap(64, 64, 64))
+                .addGap(84, 84, 84))
         );
         panelAccionesLayout.setVerticalGroup(
             panelAccionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
