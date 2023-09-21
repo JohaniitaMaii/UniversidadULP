@@ -374,8 +374,6 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Debe indicar el Dni");
         } else if (dateFecha.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Debe indicar Fecha de Nacimiento");
-        } else if (!jRadioButton1.isSelected()) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar estado");
         } else {
             vali = true;
         }

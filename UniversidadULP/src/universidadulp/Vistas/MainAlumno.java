@@ -64,7 +64,12 @@ public class MainAlumno extends javax.swing.JFrame {
         jMenuItem2.setText("Desinscribir");
         jMenu1.add(jMenuItem2);
 
-        jMenuItem5.setText("Visualizar Inscripciones");
+        jMenuItem5.setText("Visualizar Inscripciones Activas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuBar1.add(jMenu1);
@@ -72,6 +77,11 @@ public class MainAlumno extends javax.swing.JFrame {
         jMenu2.setText("Visualizar");
 
         jMenuItem3.setText("Visualizar Materias");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -95,6 +105,26 @@ public class MainAlumno extends javax.swing.JFrame {
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        // Inscripciones -> Activas
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VisualizarInscripcionesActivas VinsA = new VisualizarInscripcionesActivas();
+        VinsA.setVisible(true);
+        jDesktopPane1.add(VinsA);
+        jDesktopPane1.moveToFront(VinsA);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // Visualizar -> Materias
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        VisualizarMaterias ViMa = new VisualizarMaterias();
+        ViMa.setVisible(true);
+        jDesktopPane1.add(ViMa);
+        jDesktopPane1.moveToFront(ViMa);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,10 +154,8 @@ public class MainAlumno extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainAlumno().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainAlumno().setVisible(true);
         });
     }
 
