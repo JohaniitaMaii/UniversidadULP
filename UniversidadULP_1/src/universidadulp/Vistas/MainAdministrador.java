@@ -35,6 +35,19 @@ public class MainAdministrador extends javax.swing.JFrame {
         MIeliminarAlumno = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        listasAlumno = new javax.swing.JMenuItem();
+        jMAlumnopMateria = new javax.swing.JMenuItem();
+        jMMateriapAlumno = new javax.swing.JMenuItem();
+        jMenu5 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,14 +77,14 @@ public class MainAdministrador extends javax.swing.JFrame {
                 .addContainerGap(197, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Gestion Administrativa");
+        jMenu1.setText("Alumnos");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
             }
         });
 
-        MIagregarAlumno.setText("Gestion Alumnos");
+        MIagregarAlumno.setText("Agregar");
         MIagregarAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MIagregarAlumnoActionPerformed(evt);
@@ -79,7 +92,7 @@ public class MainAdministrador extends javax.swing.JFrame {
         });
         jMenu1.add(MIagregarAlumno);
 
-        MIeliminarAlumno.setText("Gestion Materias");
+        MIeliminarAlumno.setText("Eliminar");
         MIeliminarAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MIeliminarAlumnoActionPerformed(evt);
@@ -87,18 +100,87 @@ public class MainAdministrador extends javax.swing.JFrame {
         });
         jMenu1.add(MIeliminarAlumno);
 
-        jMenuItem3.setText("Gestion Inscripciones");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
+        jMenuItem3.setText("Visualizar");
         jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("jMenu2");
+        jMenu2.setText("Materias");
+
+        jMenuItem1.setText("Agregar");
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem4.setText("Eliminar");
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem5.setText("Visualizar");
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Administración");
+
+        jMenuItem6.setText("Modificar Calificación");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu4.setText("Consultas");
+
+        listasAlumno.setText("Listas");
+        listasAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listasAlumnoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(listasAlumno);
+
+        jMAlumnopMateria.setText("Listar Alumnos por Materias");
+        jMAlumnopMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMAlumnopMateriaActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMAlumnopMateria);
+
+        jMMateriapAlumno.setText("Listar Materias por Alumnos");
+        jMMateriapAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMMateriapAlumnoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMMateriapAlumno);
+
+        jMenuBar1.add(jMenu4);
+
+        jMenu5.setText("Vista Alumno");
+
+        jMenuItem2.setText("Alumno");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu5);
+
+        jMenu6.setText("Vista Materia");
+
+        jMenuItem7.setText("Materia");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu6);
 
         setJMenuBar(jMenuBar1);
 
@@ -117,13 +199,13 @@ public class MainAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MIagregarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIagregarAlumnoActionPerformed
-        // Abrimos la ventana interna Vista Alumno
+        // Abrimos la ventana interna AgregarAlumno
         jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
-        VistaAlumno vista = new VistaAlumno();
-        vista.setVisible(true);
-        jdpEscritorio.add(vista);
-        jdpEscritorio.moveToFront(vista);
+        VistaInscripcion vi = new VistaInscripcion();
+        vi.setVisible(true);
+        jdpEscritorio.add(vi);
+        jdpEscritorio.moveToFront(vi);
         
     }//GEN-LAST:event_MIagregarAlumnoActionPerformed
 
@@ -131,37 +213,75 @@ public class MainAdministrador extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu1ActionPerformed
 
+    private void jMAlumnopMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAlumnopMateriaActionPerformed
+        // TODO add your handling code here:
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        ListarAlumnospMaterias LAlpM = new ListarAlumnospMaterias();
+        LAlpM.setVisible(true);
+        jdpEscritorio.add(LAlpM);
+        jdpEscritorio.moveToFront(LAlpM);
+    }//GEN-LAST:event_jMAlumnopMateriaActionPerformed
+
+    private void jMMateriapAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMMateriapAlumnoActionPerformed
+        // TODO add your handling code here:
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        ListarMateriaspAlumnos LMapA = new ListarMateriaspAlumnos();
+        LMapA.setVisible(true);
+        jdpEscritorio.add(LMapA);
+        jdpEscritorio.moveToFront(LMapA);
+    }//GEN-LAST:event_jMMateriapAlumnoActionPerformed
+
     private void MIeliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIeliminarAlumnoActionPerformed
-        // Abrimos la ventana interna Vista Materia
+        // Abrimos la ventana interna AgregarAlumno
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        EliminarAlumno Ea = new EliminarAlumno();
+        Ea.setVisible(true);
+        jdpEscritorio.add(Ea);
+        jdpEscritorio.moveToFront(Ea);
+    }//GEN-LAST:event_MIeliminarAlumnoActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // Abrimos ventana para Modificar Notas
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        ModificarCalificacion Mc = new ModificarCalificacion();
+        Mc.setVisible(true);
+        jdpEscritorio.add(Mc);
+        jdpEscritorio.moveToFront(Mc);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+       jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        VistaAlumno vista = new VistaAlumno();
+       vista.setVisible(true);
+       jdpEscritorio.add(vista);
+       jdpEscritorio.moveToFront(vista);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void listasAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listasAlumnoActionPerformed
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        Listas listas = new Listas();
+        listas.setVisible(true);
+        jdpEscritorio.add(listas);
+       jdpEscritorio.moveToFront(listas);
+        
+    }//GEN-LAST:event_listasAlumnoActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // VISTA MATERIA
         jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
         VistaMateria vm = new VistaMateria();
         vm.setVisible(true);
         jdpEscritorio.add(vm);
-        jdpEscritorio.moveToFront(vm);
-    }//GEN-LAST:event_MIeliminarAlumnoActionPerformed
+       jdpEscritorio.moveToFront(vm);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // Abrimos la ventana interna Vista Materia
-        jdpEscritorio.removeAll();
-        jdpEscritorio.repaint();
-        VistaInscripcion vi = new VistaInscripcion();
-        vi.setVisible(true);
-        jdpEscritorio.add(vi);
-        jdpEscritorio.moveToFront(vi);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    public boolean esNumerico(String cadena) {//verificar si es un entero
-        boolean resultado;
-        try {
-            Integer.parseInt(cadena);
-            resultado = true;
-        } catch (NumberFormatException ex) {
-            resultado = false;
-        }
-        return resultado;
-    }
-    
     /**
      * @param args the command line arguments
      */
@@ -201,11 +321,24 @@ public class MainAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem MIagregarAlumno;
     private javax.swing.JMenuItem MIeliminarAlumno;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMAlumnopMateria;
+    private javax.swing.JMenuItem jMMateriapAlumno;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JDesktopPane jdpEscritorio;
+    private javax.swing.JMenuItem listasAlumno;
     // End of variables declaration//GEN-END:variables
 
 }
