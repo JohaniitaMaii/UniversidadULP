@@ -115,6 +115,11 @@ public class MainAdministrador extends javax.swing.JFrame {
         jMenu2.add(jMenuItem1);
 
         jMenuItem2.setText("Materias");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
@@ -189,6 +194,16 @@ public class MainAdministrador extends javax.swing.JFrame {
         jdpEscritorio.add(CMaterias);
         jdpEscritorio.moveToFront(CMaterias);
     }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        ConsultasMaterias CMaterias = new ConsultasMaterias();
+        CMaterias.setVisible(true);
+        jdpEscritorio.add(CMaterias);
+        jdpEscritorio.moveToFront(CMaterias);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public boolean esNumerico(String cadena) {//verificar si es un entero
         boolean resultado;

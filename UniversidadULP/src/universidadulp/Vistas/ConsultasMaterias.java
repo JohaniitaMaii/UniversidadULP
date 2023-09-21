@@ -50,6 +50,11 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Materias no Cursadas");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelNuevaInscripcionLayout = new javax.swing.GroupLayout(panelNuevaInscripcion);
         panelNuevaInscripcion.setLayout(panelNuevaInscripcionLayout);
@@ -101,6 +106,11 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
         });
 
         jButton3.setText("Alumnos por Materia");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -144,8 +154,16 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // MATERIA CURSADA
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // MATERIA NO CURSADA
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // ALUMNOS POR MATERIA
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
