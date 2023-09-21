@@ -5,12 +5,24 @@
  */
 package universidadulp.Vistas;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import universidadulp.acceso.AlumnoDAO;
+import universidadulp.acceso.InscripcionDAO;
+import universidadulp.entidades.Alumno;
+import universidadulp.entidades.Materia;
+
 /**
  *
  * @author Usuario
  */
 public class ConsultasMaterias extends javax.swing.JInternalFrame {
-
+ private DefaultTableModel modelo = new DefaultTableModel();
+ InscripcionDAO insDao = new InscripcionDAO() ; 
+    AlumnoDAO alumDao = new AlumnoDAO();
     /**
      * Creates new form ConsultasMaterias
      */
@@ -30,12 +42,12 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         panelNuevaInscripcion = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTidAlumno = new javax.swing.JTextField();
+        txtIdAlumno = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        txtIdMateria = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
 
         jLabel6.setText("Id Materia");
@@ -64,7 +76,7 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(jTidAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
@@ -80,7 +92,7 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2))
                     .addGroup(panelNuevaInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTidAlumno)
+                        .addComponent(txtIdAlumno)
                         .addComponent(jButton1)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -99,9 +111,9 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtIdMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtIdMateriaActionPerformed(evt);
             }
         });
 
@@ -124,7 +136,7 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
                         .addGap(16, 16, 16)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -138,7 +150,7 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
                 .addComponent(panelNuevaInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3)
                     .addComponent(jLabel6))
                 .addGap(26, 26, 26)
@@ -149,22 +161,85 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtIdMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdMateriaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtIdMateriaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // MATERIA CURSADA
+        // MATERIA CURSADA ID MATERIA / NOMBRE / AÑO / ESTADO
+        if (validar(txtIdAlumno.getText())) {
+            try {
+                List<Materia> cursadas = insDao.obtenerMateriaCursada(Integer.parseInt(txtIdAlumno.getText()));
+                cargarMateriaCursada(cursadas);
+            } catch (Exception ex) {
+                Logger.getLogger(ConsultasMaterias.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // MATERIA NO CURSADA
+        if (validar(txtIdAlumno.getText())) {
+            try {
+                List<Materia> cursadas = insDao.obtenerMateriaNoCursada(Integer.parseInt(txtIdAlumno.getText()));
+                cargarMateriaCursada(cursadas);
+            } catch (Exception ex) {
+                Logger.getLogger(ConsultasMaterias.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // ALUMNOS POR MATERIA
+        if (validar(txtIdMateria.getText())) {
+            try {
+                List<Alumno> alumnos = insDao.obtenerAlumnosPorMateria(Integer.parseInt(txtIdMateria.getText()));
+                cargarListaAlumno(alumnos);
+            } catch (Exception ex) {
+                Logger.getLogger(ConsultasMaterias.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    public boolean validar (String id) {
+        boolean valido = false;
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar un Id de Alumno");
+        } else {
+            try {
+                int idEntero = Integer.parseInt(id);
+                valido = true;
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Debe indicar un Id válido de Alumno");
+            }
+        }
+        return valido;
+    }
+    
+    public void cargarMateriaCursada(List<Materia> materias) {
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Id Materia");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
+        modelo.addColumn("Estado");
+        jTable1.setModel(modelo);
+        for (Materia aux : materias) {
+            modelo.addRow(new Object[]{aux.getIdMateria(), aux.getNombre(), aux.getAnioMateria(), aux.isEstado()});
+        }        
+    }
+     public void cargarListaAlumno(List<Alumno> alumnos) throws Exception {
+        modelo = new DefaultTableModel();
+        modelo.addColumn("ID Alumno");
+        modelo.addColumn("DNI Alumno");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Fecha de nacimiento");
+        modelo.addColumn("Estado");
+        jTable1.setModel(modelo);
+        for (Alumno a : alumnos) {
+            modelo.addRow(new Object[]{a.getIdAlumno(),a.getDni(),a.getApellido(),a.getNombre(),a.getFechaNacimiento(),a.isEstado()});
+        }
+     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -174,8 +249,8 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTidAlumno;
     private javax.swing.JPanel panelNuevaInscripcion;
+    private javax.swing.JTextField txtIdAlumno;
+    private javax.swing.JTextField txtIdMateria;
     // End of variables declaration//GEN-END:variables
 }
