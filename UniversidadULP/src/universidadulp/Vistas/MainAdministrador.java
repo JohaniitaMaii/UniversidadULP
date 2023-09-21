@@ -36,6 +36,7 @@ public class MainAdministrador extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +100,11 @@ public class MainAdministrador extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Consultas");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
 
         jMenuItem1.setText("Listas");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +113,9 @@ public class MainAdministrador extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setText("Materias");
+        jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
@@ -171,6 +180,16 @@ public class MainAdministrador extends javax.swing.JFrame {
         jdpEscritorio.moveToFront(listas);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // CONSULTAS -> MATERIAS:
+        jdpEscritorio.removeAll();
+        jdpEscritorio.repaint();
+        ConsultasMaterias CMaterias = new ConsultasMaterias();
+        CMaterias.setVisible(true);
+        jdpEscritorio.add(CMaterias);
+        jdpEscritorio.moveToFront(CMaterias);
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
     public boolean esNumerico(String cadena) {//verificar si es un entero
         boolean resultado;
         try {
@@ -225,6 +244,7 @@ public class MainAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane jdpEscritorio;
     // End of variables declaration//GEN-END:variables
