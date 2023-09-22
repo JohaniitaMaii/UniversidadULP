@@ -138,7 +138,7 @@ public class ConsultasMaterias extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(txtIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton3)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(panelNuevaInscripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())

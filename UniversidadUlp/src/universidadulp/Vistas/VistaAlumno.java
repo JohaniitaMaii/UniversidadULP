@@ -60,6 +60,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Id Alumno", "Dni Alumno" }));
         jComboBox1.setSelectedIndex(-1);
 
+        JBBurcar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar.png"))); // NOI18N
         JBBurcar.setText("Buscar");
         JBBurcar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +81,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 .addComponent(txtIntegerBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(JBBurcar)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBuscarLayout.setVerticalGroup(
             panelBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +131,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(dateFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jRadioButton1))
-                        .addContainerGap(330, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelDatosLayout.createSequentialGroup()
                         .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
@@ -171,6 +172,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificar.png"))); // NOI18N
         jButton2.setText("Modificar Alumno");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +180,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/registrar.png"))); // NOI18N
         jButton3.setText("Agregar Alumno");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,6 +188,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
         jButton4.setText("Eliminar Alumno");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,9 +203,9 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
             .addGroup(panelAccionesLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(88, 88, 88)
+                .addGap(46, 46, 46)
                 .addComponent(jButton4)
                 .addGap(64, 64, 64))
         );
@@ -253,7 +257,7 @@ public class VistaAlumno extends javax.swing.JInternalFrame {
                             break;
                     }
                     if (alumno == null) {
-                        JOptionPane.showMessageDialog(this, "El alumno no se encuentra en la base de datos");
+                        JOptionPane.showMessageDialog(this, "Ese Id de alumno no se encuentra en la base de datos");
                         borrarDatos();
                     } else {
                         cargarDatos(alumno);

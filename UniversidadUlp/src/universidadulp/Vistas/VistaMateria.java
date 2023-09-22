@@ -51,6 +51,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Ingrese ID Materia ");
 
+        buttonBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/buscar.png"))); // NOI18N
         buttonBuscar.setText("Buscar");
         buttonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +125,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
+        buttonNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/nuevo.png"))); // NOI18N
         buttonNuevo.setText("Nueva Materia");
         buttonNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,6 +133,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/modificar.png"))); // NOI18N
         buttonModificar.setText("Modificar Materia");
         buttonModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,6 +141,7 @@ public class VistaMateria extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/eliminar.png"))); // NOI18N
         buttonEliminar.setText("Eliminar Materia");
         buttonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,16 +156,16 @@ public class VistaMateria extends javax.swing.JInternalFrame {
             .addGroup(panelBotonesLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(buttonNuevo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(buttonModificar)
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
                 .addComponent(buttonEliminar)
                 .addGap(39, 39, 39))
         );
         panelBotonesLayout.setVerticalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonesLayout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonNuevo)
                     .addComponent(buttonModificar)
