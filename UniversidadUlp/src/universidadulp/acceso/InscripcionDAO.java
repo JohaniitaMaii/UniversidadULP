@@ -58,7 +58,7 @@ public class InscripcionDAO extends Conexion {
         return inscripciones;
     }
 
-    public List<Inscripcion> obtenerInscripcionesPorAlumno(int id) throws Exception {
+    public List<Inscripcion> obtenerInscripcionesPorAlumno(int id) throws Exception { // OCUPADO
         Alumno alumno = null;
         Materia materia = null;
         Inscripcion ins = null;
@@ -87,7 +87,7 @@ public class InscripcionDAO extends Conexion {
         }
     }
 
-    public List<Materia> obtenerMateriaCursada(int id) throws Exception {
+    public List<Materia> obtenerMateriaCursada(int id) throws Exception { // OCUPADO
         List<Materia> materias = new ArrayList<>();
         try {
             String sql = "SELECT materia.idMateria, materia.nombre, materia.año, materia.estado "
@@ -114,7 +114,7 @@ public class InscripcionDAO extends Conexion {
         }
     }
 
-    public List<Materia> obtenerMateriaNoCursada(int id) throws Exception {
+    public List<Materia> obtenerMateriaNoCursada(int id) throws Exception { // OCUPADO
         List<Materia> materias = new ArrayList<>();
         try {
             String sql = "SELECT materia.idMateria, materia.nombre, materia.año, materia.estado "
@@ -167,7 +167,7 @@ public class InscripcionDAO extends Conexion {
         }
     }
 
-    public List<Alumno> obtenerAlumnosPorMateria(int idMateria) throws Exception {
+    public List<Alumno> obtenerAlumnosPorMateria(int idMateria) throws Exception { // OCUPADO
         try {
             List<Alumno> alumnos = new ArrayList<>();
             Alumno a = null;

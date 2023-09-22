@@ -17,6 +17,7 @@ public class MainAdministrador extends javax.swing.JFrame {
     public MainAdministrador() {
         initComponents();
         setLocationRelativeTo(null);
+        setTitle("Administrador ULP");
     }
     /** This method is called from within the constructor to
      * initialize the form.
