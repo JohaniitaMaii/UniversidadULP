@@ -5,6 +5,16 @@
  */
 package universidadulp.Vistas;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import universidadulp.acceso.AlumnoDAO;
+import universidadulp.acceso.AdminDAO;
+import universidadulp.entidades.Alumno;
 /**
  *
  * @author Usuario
@@ -39,6 +49,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         JLabelIcon = new javax.swing.JLabel();
         txtpassword = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -106,6 +117,8 @@ public class Main extends javax.swing.JFrame {
         txtpassword.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtpassword.setForeground(new java.awt.Color(0, 0, 255));
 
+        jLabel5.setText("Si es alumno ingrese su dni en \"contraseña\"");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -133,6 +146,10 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(119, 119, 119)
                                 .addComponent(jBIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(176, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(229, 229, 229))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,7 +173,9 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jBIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,19 +199,43 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIngresarActionPerformed
+            AlumnoDAO alumnoDao = new AlumnoDAO();
+            Alumno alumno = new Alumno();
+            AdminDAO adminDAO = new AdminDAO();
+            MainAdministrador main = new MainAdministrador();
         // Segun contraseña y usuario diferenciamos alumnos de administradores
         //MAdministrador
-        if (jTUsuario.getText().equals("admin")&& txtpassword.getText().equals("1234")){
-        MainAdministrador MAd = new MainAdministrador();
-        MAd.setVisible(true);
-        this.dispose();
-        }else{
-        //MAlumno
-        MainAlumno MAl = new MainAlumno();
-        MAl.setVisible(true);
-        this.dispose();
-        }
         
+        if (jTUsuario.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe indicar una opción");
+        } else {
+                try {
+                        if (adminDAO.buscarNombreAdministrador(jTUsuario.getText())== true && adminDAO.buscarContraseñaAdministrador(txtpassword.getText())== true){
+                            MainAdministrador MAd = new MainAdministrador();
+                            MAd.setVisible(true);
+                            this.dispose();
+                        }else{
+                            try {
+                                alumno = alumnoDao.buscarAlumnoPorDni(Integer.parseInt(txtpassword.getText()));
+                                if (alumno == null) {
+                                    JOptionPane.showMessageDialog(this, "El usuario no se encuentra en la base de datos");
+                                } else {
+                                    //MAlumno
+                                    MainAlumno MAl = new MainAlumno();
+                                    MAl.setVisible(true);
+                                    this.dispose();
+                            }
+                            } catch (Exception ex) {
+                                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            
+
+                        }       
+                    } catch (Exception ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+            
     }//GEN-LAST:event_jBIngresarActionPerformed
 
     private void jTUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTUsuarioActionPerformed
@@ -241,6 +284,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
