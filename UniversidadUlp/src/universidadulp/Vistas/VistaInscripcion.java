@@ -18,7 +18,7 @@ import universidadulp.entidades.*;
 public class VistaInscripcion extends javax.swing.JInternalFrame {
    private DefaultTableModel modelo = new DefaultTableModel();
     InscripcionDAO insdao = new InscripcionDAO();
-Confirmacion confirmacion;
+
     /**
      * Creates new form VistaInscripcion
      */

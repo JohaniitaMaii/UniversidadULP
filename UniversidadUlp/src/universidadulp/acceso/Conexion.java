@@ -18,7 +18,7 @@ public class Conexion {
     protected Statement sentencia = null;
     
     private final String USER = "root"; 
-    private final String PASSWORD = "5872";
+    private final String PASSWORD = "";
     private final String DATABASE = "universidadulp";
     private final String DRIVER = "org.mariadb.jdbc.Driver";
     
