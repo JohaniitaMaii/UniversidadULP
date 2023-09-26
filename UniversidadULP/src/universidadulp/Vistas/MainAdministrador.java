@@ -6,6 +6,9 @@
 
 package universidadulp.Vistas;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Usuario
@@ -190,10 +193,16 @@ public class MainAdministrador extends javax.swing.JFrame {
         // Abrimos la ventana interna Vista Materia
         jdpEscritorio.removeAll();
         jdpEscritorio.repaint();
-        VistaInscripcion vi = new VistaInscripcion();
-        vi.setVisible(true);
+        VistaInscripcion vi;
+        try {
+            vi = new VistaInscripcion();
+             vi.setVisible(true);
         jdpEscritorio.add(vi);
         jdpEscritorio.moveToFront(vi);
+        } catch (Exception ex) {
+            Logger.getLogger(MainAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
