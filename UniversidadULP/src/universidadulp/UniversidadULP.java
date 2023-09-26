@@ -1,7 +1,6 @@
 package universidadulp;
 
-
-
+import universidadulp.Vistas.Main;
 
 /**
  *
@@ -14,9 +13,8 @@ public class UniversidadULP {
      */
     public static void main(String[] args) throws Exception {
 
-        
-        
-        
-        
+        Main m = new Main();
+        m.setVisible(true);
+
     }
 }

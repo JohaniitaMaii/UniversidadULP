@@ -5,12 +5,22 @@
  */
 package universidadulp.Vistas;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import universidadulp.acceso.InscripcionDAO;
+import universidadulp.entidades.Inscripcion;
+
 /**
  *
  * @author Usuario
  */
 public class VisualizarInscripcionesActivas extends javax.swing.JInternalFrame {
 
+    InscripcionDAO insdao = new InscripcionDAO();
+    private DefaultTableModel modelo = new DefaultTableModel();
+    int numero;
+    
     /**
      * Creates new form VisualizarInscripcionesActivas
      */
@@ -31,8 +41,9 @@ public class VisualizarInscripcionesActivas extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         panelNuevaInscripcion = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        btnVer = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -50,24 +61,36 @@ public class VisualizarInscripcionesActivas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("Inscripciones Activas:");
 
+        btnVer.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnVer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ojo.png"))); // NOI18N
+        btnVer.setText("Mostrar");
+        btnVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelNuevaInscripcionLayout = new javax.swing.GroupLayout(panelNuevaInscripcion);
         panelNuevaInscripcion.setLayout(panelNuevaInscripcionLayout);
         panelNuevaInscripcionLayout.setHorizontalGroup(
             panelNuevaInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNuevaInscripcionLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelNuevaInscripcionLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
                 .addComponent(jLabel1)
-                .addGap(116, 116, 116))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVer)
+                .addGap(58, 58, 58))
         );
         panelNuevaInscripcionLayout.setVerticalGroup(
             panelNuevaInscripcionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelNuevaInscripcionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNuevaInscripcionLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnVer)
                 .addContainerGap())
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -78,7 +101,7 @@ public class VisualizarInscripcionesActivas extends javax.swing.JInternalFrame {
                 "Id Inscripcion", "Nota", "Id Alumno", "Id Materia"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -104,13 +127,45 @@ public class VisualizarInscripcionesActivas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
+        // boton ver
+        cargarTabla();
+    }//GEN-LAST:event_btnVerActionPerformed
+
+    public void id(int num) {
+        numero = num;
+    }
+    
+    public void cargarTabla() {
+        try {
+            List<Inscripcion> lista = insdao.obtenerInscripcionesPorAlumno(numero);
+            if (lista.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "No tienes Inscripciones");
+            } else {
+                modelo = new DefaultTableModel();
+                modelo.addColumn("Id Inscripcion");
+                modelo.addColumn("Nota");
+                modelo.addColumn("Id Alumno");
+                modelo.addColumn("Id Materia");
+                tabla.setModel(modelo);
+                for (Inscripcion i : lista) {
+                    modelo.addRow(new Object[]{i.getIdInscripto(), i.getNota(), i.getAlumno().getIdAlumno(), i.getMateria().getIdMateria()});
+                }
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la tabla");
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JPanel panelNuevaInscripcion;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

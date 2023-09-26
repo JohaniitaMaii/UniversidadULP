@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import universidadulp.acceso.AlumnoDAO;
 import universidadulp.acceso.AdminDAO;
 import universidadulp.entidades.Alumno;
+
 /**
  *
  * @author Usuario
@@ -199,43 +200,44 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBIngresarActionPerformed
-            AlumnoDAO alumnoDao = new AlumnoDAO();
-            Alumno alumno = new Alumno();
-            AdminDAO adminDAO = new AdminDAO();
-            MainAdministrador main = new MainAdministrador();
+        AlumnoDAO alumnoDao = new AlumnoDAO();
+        Alumno alumno = new Alumno();
+        AdminDAO adminDAO = new AdminDAO();
+        MainAdministrador main = new MainAdministrador();
         // Segun contraseña y usuario diferenciamos alumnos de administradores
         //MAdministrador
-        
+
         if (jTUsuario.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Debe indicar una opción");
         } else {
-                try {
-                        if (adminDAO.buscarNombreAdministrador(jTUsuario.getText())== true && adminDAO.buscarContraseñaAdministrador(txtpassword.getText())== true){
-                            MainAdministrador MAd = new MainAdministrador();
-                            MAd.setVisible(true);
+            try {
+                if (adminDAO.buscarNombreAdministrador(jTUsuario.getText()) == true && adminDAO.buscarContraseñaAdministrador(txtpassword.getText()) == true) {
+                    MainAdministrador MAd = new MainAdministrador();
+                    MAd.adminNombre(jTUsuario.getText());
+                    MAd.setVisible(true);
+                    this.dispose();
+                } else {
+                    try {
+                        alumno = alumnoDao.buscarAlumnoPorDni(Integer.parseInt(txtpassword.getText()));
+                        if (alumno == null) {
+                            JOptionPane.showMessageDialog(this, "El usuario no se encuentra en la base de datos");
+                        } else {
+                            //MAlumno
+                            MainAlumno MAl = new MainAlumno();
+                            MAl.traerAlumno(alumno);
+                            MAl.setVisible(true);
                             this.dispose();
-                        }else{
-                            try {
-                                alumno = alumnoDao.buscarAlumnoPorDni(Integer.parseInt(txtpassword.getText()));
-                                if (alumno == null) {
-                                    JOptionPane.showMessageDialog(this, "El usuario no se encuentra en la base de datos");
-                                } else {
-                                    //MAlumno
-                                    MainAlumno MAl = new MainAlumno();
-                                    MAl.setVisible(true);
-                                    this.dispose();
-                            }
-                            } catch (Exception ex) {
-                                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                            }
-                            
-
-                        }       
+                        }
                     } catch (Exception ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
+            } catch (Exception ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-            
+
     }//GEN-LAST:event_jBIngresarActionPerformed
 
     private void jTUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTUsuarioActionPerformed

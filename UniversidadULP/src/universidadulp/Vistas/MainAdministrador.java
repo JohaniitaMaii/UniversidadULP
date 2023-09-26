@@ -31,7 +31,7 @@ public class MainAdministrador extends javax.swing.JFrame {
         jdpEscritorio = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         MIagregarAlumno = new javax.swing.JMenuItem();
@@ -52,12 +52,12 @@ public class MainAdministrador extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/admin.png"))); // NOI18N
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Administrador");
+        lbNombre.setForeground(new java.awt.Color(255, 255, 255));
+        lbNombre.setText("Administrador");
 
         jdpEscritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jdpEscritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jdpEscritorio.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jdpEscritorio.setLayer(lbNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jdpEscritorioLayout = new javax.swing.GroupLayout(jdpEscritorio);
         jdpEscritorio.setLayout(jdpEscritorioLayout);
@@ -67,7 +67,7 @@ public class MainAdministrador extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jdpEscritorioLayout.createSequentialGroup()
                 .addGap(205, 205, 205)
@@ -81,7 +81,7 @@ public class MainAdministrador extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addGroup(jdpEscritorioLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3)))
+                        .addComponent(lbNombre)))
                 .addGap(141, 141, 141)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(184, Short.MAX_VALUE))
@@ -236,6 +236,10 @@ public class MainAdministrador extends javax.swing.JFrame {
         }
         return resultado;
     }
+    public void adminNombre(String nombre) {//METODO Label ----------------------------------------
+        lbNombre.setText(nombre);
+    }
+    
     
     /**
      * @param args the command line arguments
@@ -277,7 +281,6 @@ public class MainAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem MIeliminarAlumno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -285,6 +288,7 @@ public class MainAdministrador extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JDesktopPane jdpEscritorio;
+    private javax.swing.JLabel lbNombre;
     // End of variables declaration//GEN-END:variables
 
 }

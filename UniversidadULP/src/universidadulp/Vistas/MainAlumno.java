@@ -5,12 +5,16 @@
  */
 package universidadulp.Vistas;
 
+import universidadulp.entidades.Alumno;
+
 /**
  *
  * @author Usuario
  */
 public class MainAlumno extends javax.swing.JFrame {
 
+    Alumno alumno = new Alumno();
+    
     /**
      * Creates new form MainAlumno
      */
@@ -30,7 +34,9 @@ public class MainAlumno extends javax.swing.JFrame {
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbNombre = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lbID = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -45,11 +51,19 @@ public class MainAlumno extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/user.png"))); // NOI18N
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Alumno");
+        lbNombre.setForeground(new java.awt.Color(255, 255, 255));
+        lbNombre.setText("Alumno");
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("ID:");
+
+        lbID.setForeground(new java.awt.Color(255, 255, 255));
+        lbID.setText("id");
 
         jDesktopPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lbNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(lbID, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -59,20 +73,28 @@ public class MainAlumno extends javax.swing.JFrame {
                 .addContainerGap(620, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18))
+                .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbNombre)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbID, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(7, 7, 7))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel2)))
-                .addContainerGap(381, Short.MAX_VALUE))
+                        .addComponent(lbNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(lbID))))
+                .addContainerGap(367, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Inscripciones");
@@ -86,6 +108,11 @@ public class MainAlumno extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Desinscribir");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem5.setText("Visualizar Inscripciones Activas");
@@ -127,7 +154,13 @@ public class MainAlumno extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        // Iscribirme
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        Inscribirme in = new Inscribirme();
+        in.setVisible(true);
+        jDesktopPane1.add(in);
+        jDesktopPane1.moveToFront(in);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -138,6 +171,7 @@ public class MainAlumno extends javax.swing.JFrame {
         VinsA.setVisible(true);
         jDesktopPane1.add(VinsA);
         jDesktopPane1.moveToFront(VinsA);
+        VinsA.id(Integer.parseInt(lbID.getText()));
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -148,8 +182,24 @@ public class MainAlumno extends javax.swing.JFrame {
         ViMa.setVisible(true);
         jDesktopPane1.add(ViMa);
         jDesktopPane1.moveToFront(ViMa);
+        ViMa.id(Integer.parseInt(lbID.getText()));
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // Eliminar inscripción
+        jDesktopPane1.removeAll();
+        jDesktopPane1.repaint();
+        Desinscribirme des = new Desinscribirme();
+        des.setVisible(true);
+        jDesktopPane1.add(des);
+        jDesktopPane1.moveToFront(des);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    public void traerAlumno(Alumno alu) {//-------------------------------------------------------------
+        lbNombre.setText(alu.getNombre());
+        lbID.setText(alu.getIdAlumno() + "");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -186,7 +236,7 @@ public class MainAlumno extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -194,5 +244,7 @@ public class MainAlumno extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JLabel lbID;
+    private javax.swing.JLabel lbNombre;
     // End of variables declaration//GEN-END:variables
 }
