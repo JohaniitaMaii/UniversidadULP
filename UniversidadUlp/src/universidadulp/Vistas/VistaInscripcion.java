@@ -266,12 +266,9 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void btnNuevaInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaInscripcionActionPerformed
-    
-           //BOTON NUEVA INSCRIPCION          
-     
+   //BOTON NUEVA INSCRIPCION         
         Alumno alu = (Alumno) comboAlumno.getSelectedItem();
-        Materia mate = (Materia) jComboBox1.getSelectedItem();       
-        
+        Materia mate = (Materia) jComboBox1.getSelectedItem();
         if (validar()) {
             String nota = nota();
             if (esNumerico(nota)) {
