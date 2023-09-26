@@ -321,26 +321,19 @@ public class VistaInscripcion extends javax.swing.JInternalFrame {
 
     private void btnEliminarInsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarInsActionPerformed
         // BOTON ELIMINAR INSCRIPCION
-        
-        if (validar()) {
-            if (esNumerico( nota())) {
-                Alumno a  = (Alumno)comboAlumno.getSelectedItem();
-                int idA = a.getIdAlumno();
-                Materia mater = (Materia) jComboBox1.getSelectedItem();
-                int idM = mater.getIdMateria();
-                try {
-                    insdao.borrarInscrpcionMateriaAlumno(idA, idM);
-                     JOptionPane.showMessageDialog(null, "Se ha eliminado la Inscripción");
-                    borrarDatosInscricion();
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "Error al eliminar la Inscripción");
-                    borrarDatosInscricion();
-                }
-            }else {
-                JOptionPane.showMessageDialog(null, "Ingresa datos válidos en los espacios");
-                borrarDatosInscricion();
-            }
+        Alumno a = (Alumno) comboAlumno.getSelectedItem();
+        int idA = a.getIdAlumno();
+        Materia mater = (Materia) jComboBox1.getSelectedItem();
+        int idM = mater.getIdMateria();
+        try {
+            insdao.borrarInscrpcionMateriaAlumno(idA, idM);
+            JOptionPane.showMessageDialog(null, "Se ha eliminado la Inscripción");
+            borrarDatosInscricion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar la Inscripción");
+            borrarDatosInscricion();
         }
+
     }//GEN-LAST:event_btnEliminarInsActionPerformed
 
     private void txtNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNotaActionPerformed
