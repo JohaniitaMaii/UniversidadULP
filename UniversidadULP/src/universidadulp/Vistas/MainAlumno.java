@@ -161,6 +161,7 @@ public class MainAlumno extends javax.swing.JFrame {
         in.setVisible(true);
         jDesktopPane1.add(in);
         jDesktopPane1.moveToFront(in);
+         in.traerID(Integer.parseInt(lbID.getText()));
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed

@@ -17,7 +17,7 @@ import universidadulp.entidades.Materia;
 public class Inscribirme extends javax.swing.JInternalFrame {
 
     InscripcionDAO insdao = new InscripcionDAO();
-
+    int numero;
     /**
      * Creates new form Inscribirme
      */
@@ -35,28 +35,14 @@ public class Inscribirme extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtIdAlumno = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtIdMateria = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtNota = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel1.setText("Id Alumno");
-
-        txtIdAlumno.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Id Materia");
 
         txtIdMateria.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Nota");
-
-        txtNota.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/nuevo.png"))); // NOI18N
@@ -71,45 +57,25 @@ public class Inscribirme extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(txtIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jButton1)))
-                .addContainerGap(40, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
+                    .addComponent(txtIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtIdAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNota, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                    .addComponent(txtIdMateria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(55, 55, 55)
                 .addComponent(jButton1)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -126,16 +92,21 @@ public class Inscribirme extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void traerID(int id){
+        numero = id;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Alumno alu = new Alumno();
         Materia mate = new Materia();
+        
         if (validar()) {
-            if (esNumerico(txtIdAlumno.getText(), txtIdMateria.getText(), txtNota.getText())) {
+            if (esNumerico(numero+"", txtIdMateria.getText(), 0+"")) {
                 try {
-                    alu.setIdAlumno(Integer.parseInt(txtIdAlumno.getText()));
+                    alu.setIdAlumno(Integer.parseInt(numero+""));
                     mate.setIdMateria(Integer.parseInt(txtIdMateria.getText()));
                     Inscripcion ins = new Inscripcion(0, alu, mate);
-                    ins.setNota(Integer.parseInt(txtNota.getText()));
+                    ins.setNota(Integer.parseInt(0+""));
                     insdao.guardarInscripcion(ins);
                     JOptionPane.showMessageDialog(this, "Se ha guardado la Inscripción");
                     borrarDatosInscricion();
@@ -152,18 +123,13 @@ public class Inscribirme extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void borrarDatosInscricion() {
-        txtNota.setText("");
-        txtIdAlumno.setText("");
+       
         txtIdMateria.setText("");
     }
 
     public boolean validar() {
         boolean vali = false;
-        if (txtNota.getText().equals("") || txtNota.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe indicar la Nota");
-        } else if (txtIdAlumno.getText().equals("") || txtIdAlumno.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe indicar el Id Alumno");
-        } else if (txtIdMateria.getText().equals("") || txtIdMateria.getText().trim().isEmpty()) {
+         if (txtIdMateria.getText().equals("") || txtIdMateria.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe indicar el Id Materia");
         } else {
             vali = true;
@@ -187,12 +153,8 @@ public class Inscribirme extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField txtIdAlumno;
     private javax.swing.JTextField txtIdMateria;
-    private javax.swing.JTextField txtNota;
     // End of variables declaration//GEN-END:variables
 }
